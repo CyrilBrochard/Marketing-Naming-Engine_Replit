@@ -10,7 +10,7 @@ export const BRANDS: NomenclatureOption[] = [
 
 export const DELIVERY_TYPES: NomenclatureOption[] = [
   { value: "AUT", label: "AUT – Journey (automatisé)" },
-  { value: "OS", label: "OS – One Shot (campagne ponctuelle)" },
+  { value: "OS", label: "OS – One Shot" },
   { value: "TRX", label: "TRX – Transactionnel" },
 ];
 
@@ -19,7 +19,7 @@ export const INITIATIVES: NomenclatureOption[] = [
   { value: "IC", label: "IC – Insiders Club" },
   { value: "SUBR", label: "SUBR – Subscription" },
   { value: "MCL", label: "MCL – Multi-cam License" },
-  { value: "CO", label: "CO – Custom/Autre" },
+  { value: "CO", label: "CO – Custom" },
 ];
 
 export const TOUCHPOINTS: NomenclatureOption[] = [
@@ -114,6 +114,15 @@ export const PLANS: NomenclatureOption[] = [
   { value: "AP", label: "AP – Annual Plan" },
 ];
 
+export const PRODUCTS: NomenclatureOption[] = [
+  { value: "Camera", label: "Camera" },
+  { value: "Plan", label: "Plan" },
+  { value: "Accessory", label: "Accessory" },
+  { value: "Bundle", label: "Bundle" },
+  { value: "Software", label: "Software" },
+  { value: "License", label: "License" },
+];
+
 export const VERSIONS: NomenclatureOption[] = [
   { value: "V1", label: "V1" },
   { value: "V2", label: "V2" },
@@ -133,22 +142,27 @@ export const STEPS: NomenclatureOption[] = [
   { value: "S04", label: "S04" },
 ];
 
-export const FISCAL_YEARS: NomenclatureOption[] = [
-  { value: "FY24", label: "FY24" },
-  { value: "FY25", label: "FY25" },
-  { value: "FY26", label: "FY26" },
-  { value: "FY27", label: "FY27" },
-];
-
 export const CAMPAIGN_TYPES: NomenclatureOption[] = [
   { value: "PRM", label: "PRM – Promo" },
   { value: "EDU", label: "EDU – Education" },
   { value: "ANN", label: "ANN – Announcement" },
-  { value: "NPS", label: "NPS" },
+  { value: "NPS", label: "NPS – NPS" },
   { value: "SUR", label: "SUR – Survey" },
+  { value: "ACQ", label: "ACQ – Acquisition" },
 ];
 
 export function getCountryRegion(countryValue: string): string {
   const c = COUNTRIES.find((c) => c.value === countryValue);
   return c?.regions[0] ?? "";
+}
+
+export function getFullTerm(value: string, options: NomenclatureOption[]): string {
+  const opt = options.find((o) => o.value === value);
+  if (!opt) return value;
+  const sep = " – ";
+  const idx = opt.label.indexOf(sep);
+  if (idx >= 0) {
+    return opt.label.substring(idx + sep.length).replace(/\s+/g, "_");
+  }
+  return opt.label.replace(/\s+/g, "_");
 }

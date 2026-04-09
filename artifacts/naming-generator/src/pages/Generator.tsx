@@ -1,115 +1,158 @@
 import { useState, useMemo, useRef, useEffect } from "react";
 import {
-  BRANDS,
-  DELIVERY_TYPES,
-  INITIATIVES,
-  TOUCHPOINTS,
-  OBJECTIVES,
-  CHANNELS,
-  REGIONS,
-  COUNTRIES,
-  LANGUAGES,
-  SEGMENTS,
-  PLANS,
-  VERSIONS,
-  TESTS,
-  STEPS,
-  FISCAL_YEARS,
-  CAMPAIGN_TYPES,
-  getCountryRegion,
+  BRANDS, DELIVERY_TYPES, INITIATIVES, TOUCHPOINTS, OBJECTIVES, CHANNELS,
+  REGIONS, COUNTRIES, LANGUAGES, SEGMENTS, PLANS, PRODUCTS, VERSIONS, TESTS,
+  STEPS, CAMPAIGN_TYPES, getCountryRegion, getFullTerm,
 } from "@/data/nomenclature";
 import type { NomenclatureOption } from "@/data/nomenclature";
 
 type FormMode = "journey" | "oneshot";
+type ResultTab = "campaignName" | "campaignCode" | "assetAcronyms" | "assetFull";
 
 type JourneyForm = {
-  brand: string;
-  deliveryType: string;
-  initiative: string;
-  touchpoint: string;
-  objective: string;
-  channel: string;
-  regions: string[];
-  countries: string[];
-  languages: string[];
-  segment: string;
-  plan: string;
-  version: string;
-  test: string;
-  step: string;
+  brand: string; deliveryType: string; initiative: string; touchpoint: string;
+  objective: string; channel: string; regions: string[]; countries: string[];
+  languages: string[]; segment: string; plan: string; version: string; test: string; step: string;
 };
 
 type OneShotForm = {
-  brand: string;
-  deliveryType: string;
-  campaignType: string;
-  campaignName: string;
-  objective: string;
-  channel: string;
-  region: string;
-  country: string;
-  language: string;
-  segment: string;
-  plan: string;
-  fiscalYear: string;
+  brand: string; deliveryType: string; campaignPeriod: string; campaignType: string;
+  campaignName: string; objective: string; channel: string; regions: string[];
+  countries: string[]; languages: string[]; segment: string; product: string;
+  version: string; test: string; step: string;
 };
 
-function SelectField({
-  label,
-  value,
-  onChange,
-  options,
-  required,
-  placeholder,
-  description,
-}: {
-  label: string;
-  value: string;
-  onChange: (v: string) => void;
-  options: NomenclatureOption[];
-  required?: boolean;
-  placeholder?: string;
-  description?: string;
+type GeneratedResults = {
+  campaignName: string;
+  campaignCode: string;
+  assetAcronyms: string[];
+  assetFull: string[];
+};
+
+function getFullTerm2(value: string, options: NomenclatureOption[]): string {
+  return getFullTerm(value, options);
+}
+
+function computeResults(journey: JourneyForm | null, oneshot: OneShotForm | null, mode: FormMode): GeneratedResults | null {
+  if (mode === "journey" && journey) {
+    const { brand, deliveryType, initiative, objective, channel, touchpoint, regions, countries, languages, segment, plan, version, test, step } = journey;
+    if (!brand || !deliveryType || !initiative || !objective || !channel) return null;
+
+    const campaignName = [brand, deliveryType, initiative, objective].filter(Boolean).join("_");
+    const campaignCode = [
+      getFullTerm2(brand, BRANDS),
+      getFullTerm2(deliveryType, DELIVERY_TYPES),
+      getFullTerm2(initiative, INITIATIVES),
+      getFullTerm2(objective, OBJECTIVES),
+    ].filter(Boolean).join("_");
+
+    const effCountries = countries.length > 0 ? countries : [];
+    const effLanguages = languages.length > 0 ? languages : [];
+
+    const assetAcronyms: string[] = [];
+    const assetFull: string[] = [];
+
+    if (effCountries.length > 0 && effLanguages.length > 0) {
+      for (const country of effCountries) {
+        for (const lang of effLanguages) {
+          const region = getCountryRegion(country) || (regions[0] ?? "");
+          const acronymParts = [brand, deliveryType, initiative, touchpoint, objective, channel, region, country, lang, segment, plan, version, test, step].filter(Boolean);
+          assetAcronyms.push(acronymParts.join("_"));
+          const fullParts = [
+            getFullTerm2(brand, BRANDS), getFullTerm2(deliveryType, DELIVERY_TYPES),
+            getFullTerm2(initiative, INITIATIVES),
+            touchpoint ? getFullTerm2(touchpoint, TOUCHPOINTS) : "",
+            getFullTerm2(objective, OBJECTIVES), getFullTerm2(channel, CHANNELS),
+            getFullTerm2(region, REGIONS), getFullTerm2(country, COUNTRIES),
+            getFullTerm2(lang, LANGUAGES),
+            segment ? getFullTerm2(segment, SEGMENTS) : "",
+            plan ? getFullTerm2(plan, PLANS) : "",
+            version ? getFullTerm2(version, VERSIONS) : "",
+            test ? getFullTerm2(test, TESTS) : "",
+            step ? getFullTerm2(step, STEPS) : "",
+          ].filter(Boolean);
+          assetFull.push(fullParts.join("_"));
+        }
+      }
+    }
+    return { campaignName, campaignCode, assetAcronyms, assetFull };
+  }
+
+  if (mode === "oneshot" && oneshot) {
+    const { brand, deliveryType, campaignPeriod, campaignType, campaignName: cName, objective, channel, countries, languages, regions, segment, product, version, test, step } = oneshot;
+    if (!brand || !deliveryType || !objective || !channel) return null;
+
+    const campaignName = [brand, deliveryType, cName, objective].filter(Boolean).join("_");
+    const campaignCode = [
+      getFullTerm2(brand, BRANDS),
+      getFullTerm2(deliveryType, DELIVERY_TYPES),
+      cName,
+      getFullTerm2(objective, OBJECTIVES),
+    ].filter(Boolean).join("_");
+
+    const effCountries = countries.length > 0 ? countries : [];
+    const effLanguages = languages.length > 0 ? languages : [];
+
+    const assetAcronyms: string[] = [];
+    const assetFull: string[] = [];
+
+    if (effCountries.length > 0 && effLanguages.length > 0) {
+      for (const country of effCountries) {
+        for (const lang of effLanguages) {
+          const region = getCountryRegion(country) || (regions[0] ?? "");
+          const acronymParts = [brand, deliveryType, campaignPeriod, campaignType, cName, objective, channel, region, country, lang, segment, product, version, test, step].filter(Boolean);
+          assetAcronyms.push(acronymParts.join("_"));
+          const fullParts = [
+            getFullTerm2(brand, BRANDS), getFullTerm2(deliveryType, DELIVERY_TYPES),
+            campaignPeriod,
+            campaignType ? getFullTerm2(campaignType, CAMPAIGN_TYPES) : "",
+            cName,
+            getFullTerm2(objective, OBJECTIVES), getFullTerm2(channel, CHANNELS),
+            getFullTerm2(region, REGIONS), getFullTerm2(country, COUNTRIES),
+            getFullTerm2(lang, LANGUAGES),
+            segment ? getFullTerm2(segment, SEGMENTS) : "",
+            product ? getFullTerm2(product, PRODUCTS) : "",
+            version ? getFullTerm2(version, VERSIONS) : "",
+            test ? getFullTerm2(test, TESTS) : "",
+            step ? getFullTerm2(step, STEPS) : "",
+          ].filter(Boolean);
+          assetFull.push(fullParts.join("_"));
+        }
+      }
+    }
+    return { campaignName, campaignCode, assetAcronyms, assetFull };
+  }
+  return null;
+}
+
+function SelectField({ label, value, onChange, options, required, description, disabled }: {
+  label: string; value: string; onChange: (v: string) => void;
+  options: NomenclatureOption[]; required?: boolean; description?: string; disabled?: boolean;
 }) {
   return (
     <div className="flex flex-col gap-1">
-      <label className="text-xs font-semibold uppercase tracking-widest text-slate-400">
-        {label}
-        {required && <span className="text-blue-400 ml-1">*</span>}
+      <label className="text-[11px] font-semibold uppercase tracking-widest text-gray-400">
+        {label}{required && <span className="text-indigo-500 ml-1">*</span>}
       </label>
-      {description && <p className="text-xs text-slate-500 mb-0.5">{description}</p>}
+      {description && <p className="text-[11px] text-gray-400">{description}</p>}
       <select
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        className="bg-slate-800 border border-slate-700 rounded-lg px-3 py-2.5 text-sm text-slate-100 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all appearance-none cursor-pointer hover:border-slate-600"
+        disabled={disabled}
+        className="bg-white border border-gray-200 rounded-lg px-3 py-2.5 text-sm text-gray-800 focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:border-transparent transition-all appearance-none cursor-pointer hover:border-gray-300 shadow-xs disabled:opacity-40 disabled:cursor-not-allowed"
       >
-        <option value="">{placeholder || "— Choisir —"}</option>
+        <option value="">— Choisir —</option>
         {options.map((opt) => (
-          <option key={opt.value} value={opt.value}>
-            {opt.label}
-          </option>
+          <option key={opt.value} value={opt.value}>{opt.label}</option>
         ))}
       </select>
     </div>
   );
 }
 
-function TextField({
-  label,
-  value,
-  onChange,
-  required,
-  placeholder,
-  description,
-  maxLength,
-}: {
-  label: string;
-  value: string;
-  onChange: (v: string) => void;
-  required?: boolean;
-  placeholder?: string;
-  description?: string;
-  maxLength?: number;
+function TextField({ label, value, onChange, required, placeholder, description, maxLength }: {
+  label: string; value: string; onChange: (v: string) => void;
+  required?: boolean; placeholder?: string; description?: string; maxLength?: number;
 }) {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const val = e.target.value.toUpperCase().replace(/[^A-Z0-9_]/g, "");
@@ -117,120 +160,87 @@ function TextField({
   };
   return (
     <div className="flex flex-col gap-1">
-      <label className="text-xs font-semibold uppercase tracking-widest text-slate-400">
-        {label}
-        {required && <span className="text-blue-400 ml-1">*</span>}
+      <label className="text-[11px] font-semibold uppercase tracking-widest text-gray-400">
+        {label}{required && <span className="text-indigo-500 ml-1">*</span>}
       </label>
-      {description && <p className="text-xs text-slate-500 mb-0.5">{description}</p>}
-      <input
-        type="text"
-        value={value}
-        onChange={handleChange}
-        maxLength={maxLength || 20}
-        placeholder={placeholder || ""}
-        className="bg-slate-800 border border-slate-700 rounded-lg px-3 py-2.5 text-sm text-slate-100 placeholder-slate-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all hover:border-slate-600"
-      />
+      {description && <p className="text-[11px] text-gray-400">{description}</p>}
+      <div className="relative">
+        <input
+          type="text"
+          value={value}
+          onChange={handleChange}
+          maxLength={maxLength || 20}
+          placeholder={placeholder || ""}
+          className="w-full bg-white border border-gray-200 rounded-lg px-3 py-2.5 text-sm text-gray-800 placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:border-transparent transition-all hover:border-gray-300 shadow-xs"
+        />
+        {maxLength && value.length > 0 && (
+          <span className={`absolute right-3 top-1/2 -translate-y-1/2 text-[10px] font-mono ${value.length > maxLength * 0.8 ? "text-amber-500" : "text-gray-300"}`}>
+            {value.length}/{maxLength}
+          </span>
+        )}
+      </div>
     </div>
   );
 }
 
-function MultiSelectField({
-  label,
-  values,
-  onChange,
-  options,
-  required,
-  description,
-  emptyMessage,
-}: {
-  label: string;
-  values: string[];
-  onChange: (v: string[]) => void;
-  options: NomenclatureOption[];
-  required?: boolean;
-  description?: string;
-  emptyMessage?: string;
+function MultiSelectField({ label, values, onChange, options, required, description, emptyMessage }: {
+  label: string; values: string[]; onChange: (v: string[]) => void;
+  options: NomenclatureOption[]; required?: boolean; description?: string; emptyMessage?: string;
 }) {
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     function handleClick(e: MouseEvent) {
-      if (ref.current && !ref.current.contains(e.target as Node)) {
-        setOpen(false);
-      }
+      if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false);
     }
     document.addEventListener("mousedown", handleClick);
     return () => document.removeEventListener("mousedown", handleClick);
   }, []);
 
   const toggle = (val: string) => {
-    if (values.includes(val)) {
-      onChange(values.filter((v) => v !== val));
-    } else {
-      onChange([...values, val]);
-    }
+    onChange(values.includes(val) ? values.filter((v) => v !== val) : [...values, val]);
   };
 
   const disabled = options.length === 0;
 
   return (
     <div className="flex flex-col gap-1" ref={ref}>
-      <label className="text-xs font-semibold uppercase tracking-widest text-slate-400">
-        {label}
-        {required && <span className="text-blue-400 ml-1">*</span>}
+      <label className="text-[11px] font-semibold uppercase tracking-widest text-gray-400">
+        {label}{required && <span className="text-indigo-500 ml-1">*</span>}
       </label>
-      {description && <p className="text-xs text-slate-500 mb-0.5">{description}</p>}
+      {description && <p className="text-[11px] text-gray-400">{description}</p>}
       <div className="relative">
         <button
           type="button"
           disabled={disabled}
           onClick={() => !disabled && setOpen((o) => !o)}
-          className={`w-full flex items-center justify-between bg-slate-800 border rounded-lg px-3 py-2.5 text-sm text-left transition-all focus:outline-none focus:ring-2 focus:ring-blue-500 ${
-            disabled
-              ? "border-slate-800 text-slate-600 cursor-not-allowed"
-              : open
-              ? "border-blue-500 text-slate-100"
-              : "border-slate-700 text-slate-100 hover:border-slate-600 cursor-pointer"
+          className={`w-full flex items-center justify-between bg-white border rounded-lg px-3 py-2.5 text-sm text-left transition-all focus:outline-none shadow-xs ${
+            disabled ? "border-gray-100 text-gray-300 cursor-not-allowed"
+            : open ? "border-indigo-400 ring-2 ring-indigo-100 text-gray-800"
+            : "border-gray-200 text-gray-800 hover:border-gray-300 cursor-pointer"
           }`}
         >
           <span className="truncate">
-            {disabled
-              ? emptyMessage || "— Sélectionner une région d'abord —"
-              : values.length === 0
-              ? "— Choisir (multi) —"
+            {disabled ? (emptyMessage || "— Sélectionner une région —")
+              : values.length === 0 ? "— Choisir (multi-sélection) —"
               : values.join(", ")}
           </span>
-          <svg
-            width="12"
-            height="12"
-            viewBox="0 0 12 12"
-            fill="none"
-            className={`ml-2 flex-shrink-0 transition-transform ${open ? "rotate-180" : ""} ${disabled ? "text-slate-700" : "text-slate-400"}`}
-          >
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none" className={`ml-2 flex-shrink-0 transition-transform ${open ? "rotate-180" : ""} text-gray-400`}>
             <path d="M2 4l4 4 4-4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
           </svg>
         </button>
 
         {open && (
-          <div className="absolute z-50 mt-1 w-full bg-slate-800 border border-slate-700 rounded-lg shadow-xl overflow-hidden">
+          <div className="absolute z-50 mt-1 w-full bg-white border border-gray-200 rounded-xl shadow-lg overflow-hidden">
             <div className="max-h-52 overflow-y-auto">
               {options.map((opt) => {
                 const checked = values.includes(opt.value);
                 return (
-                  <button
-                    key={opt.value}
-                    type="button"
-                    onClick={() => toggle(opt.value)}
-                    className={`w-full flex items-center gap-3 px-3 py-2.5 text-sm text-left hover:bg-slate-700 transition-colors ${
-                      checked ? "text-blue-300" : "text-slate-200"
-                    }`}
+                  <button key={opt.value} type="button" onClick={() => toggle(opt.value)}
+                    className={`w-full flex items-center gap-3 px-3 py-2.5 text-sm text-left hover:bg-indigo-50 transition-colors ${checked ? "text-indigo-700 bg-indigo-50/50" : "text-gray-700"}`}
                   >
-                    <span
-                      className={`w-4 h-4 flex-shrink-0 rounded border flex items-center justify-center transition-colors ${
-                        checked ? "bg-blue-600 border-blue-600" : "border-slate-600"
-                      }`}
-                    >
+                    <span className={`w-4 h-4 flex-shrink-0 rounded border flex items-center justify-center transition-colors ${checked ? "bg-indigo-600 border-indigo-600" : "border-gray-300"}`}>
                       {checked && (
                         <svg width="10" height="8" viewBox="0 0 10 8" fill="none">
                           <path d="M1 4l2.5 2.5L9 1" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
@@ -243,12 +253,8 @@ function MultiSelectField({
               })}
             </div>
             {values.length > 0 && (
-              <div className="border-t border-slate-700 px-3 py-2">
-                <button
-                  type="button"
-                  onClick={() => onChange([])}
-                  className="text-xs text-slate-400 hover:text-slate-200 transition-colors"
-                >
+              <div className="border-t border-gray-100 px-3 py-2">
+                <button type="button" onClick={() => onChange([])} className="text-xs text-gray-400 hover:text-gray-600 transition-colors">
                   Tout désélectionner
                 </button>
               </div>
@@ -256,22 +262,12 @@ function MultiSelectField({
           </div>
         )}
       </div>
-
       {values.length > 0 && (
         <div className="flex flex-wrap gap-1 mt-1">
           {values.map((v) => (
-            <span
-              key={v}
-              className="inline-flex items-center gap-1 bg-blue-900/40 text-blue-300 border border-blue-800/50 rounded px-2 py-0.5 text-xs font-mono"
-            >
+            <span key={v} className="inline-flex items-center gap-1 bg-indigo-50 text-indigo-700 border border-indigo-100 rounded-full px-2.5 py-0.5 text-xs font-semibold">
               {v}
-              <button
-                type="button"
-                onClick={() => toggle(v)}
-                className="hover:text-blue-100 transition-colors leading-none"
-              >
-                ×
-              </button>
+              <button type="button" onClick={() => toggle(v)} className="hover:text-indigo-900 transition-colors leading-none ml-0.5">×</button>
             </span>
           ))}
         </div>
@@ -280,465 +276,376 @@ function MultiSelectField({
   );
 }
 
+function SectionDivider({ label }: { label: string }) {
+  return (
+    <div className="sm:col-span-2 flex items-center gap-3 mt-2">
+      <span className="text-[10px] font-bold uppercase tracking-widest text-gray-400">{label}</span>
+      <div className="flex-1 h-px bg-gray-100" />
+    </div>
+  );
+}
+
+function ResultCard({ name, onCopy, copied, limit, showFull }: {
+  name: string; onCopy: () => void; copied: boolean; limit: number; showFull?: boolean;
+}) {
+  const isOver = name.length > limit;
+  return (
+    <div className={`group flex items-start gap-3 p-3 rounded-xl border transition-all ${isOver ? "border-amber-200 bg-amber-50" : "border-gray-100 bg-gray-50 hover:border-indigo-200 hover:bg-indigo-50/30"}`}>
+      <p className={`font-mono text-xs break-all leading-relaxed flex-1 ${isOver ? "text-amber-700" : "text-gray-700"}`}>{name}</p>
+      <div className="flex flex-col items-end gap-1 flex-shrink-0">
+        <button
+          onClick={onCopy}
+          className={`text-[11px] px-2 py-1 rounded-lg font-semibold transition-all whitespace-nowrap ${
+            copied ? "bg-emerald-100 text-emerald-700" : "bg-white border border-gray-200 text-gray-500 hover:text-indigo-600 hover:border-indigo-300 opacity-0 group-hover:opacity-100"
+          }`}
+        >
+          {copied ? "Copié !" : "Copier"}
+        </button>
+        <span className={`text-[10px] font-mono ${isOver ? "text-amber-500 font-bold" : "text-gray-300"}`}>
+          {name.length}/{limit}{isOver ? " !" : ""}
+        </span>
+      </div>
+    </div>
+  );
+}
+
 export default function Generator() {
   const [mode, setMode] = useState<FormMode>("journey");
-  const [copiedIdx, setCopiedIdx] = useState<number | null>(null);
+  const [activeTab, setActiveTab] = useState<ResultTab>("campaignName");
+  const [copiedIdx, setCopiedIdx] = useState<string | null>(null);
   const [copiedAll, setCopiedAll] = useState(false);
 
   const [journey, setJourney] = useState<JourneyForm>({
-    brand: "",
-    deliveryType: "",
-    initiative: "",
-    touchpoint: "",
-    objective: "",
-    channel: "",
-    regions: [],
-    countries: [],
-    languages: [],
-    segment: "",
-    plan: "",
-    version: "",
-    test: "",
-    step: "",
+    brand: "", deliveryType: "", initiative: "", touchpoint: "", objective: "",
+    channel: "", regions: [], countries: [], languages: [],
+    segment: "", plan: "", version: "", test: "", step: "",
   });
 
   const [oneshot, setOneshot] = useState<OneShotForm>({
-    brand: "",
-    deliveryType: "OS",
-    campaignType: "",
-    campaignName: "",
-    objective: "",
-    channel: "",
-    region: "",
-    country: "",
-    language: "",
-    segment: "",
-    plan: "",
-    fiscalYear: "",
+    brand: "", deliveryType: "OS", campaignPeriod: "", campaignType: "",
+    campaignName: "", objective: "", channel: "", regions: [], countries: [],
+    languages: [], segment: "", product: "", version: "", test: "", step: "",
   });
 
-  const setJ = (key: keyof JourneyForm) => (val: string) =>
-    setJourney((prev) => ({ ...prev, [key]: val }));
+  const setJ = (key: keyof JourneyForm) => (val: string) => setJourney((p) => ({ ...p, [key]: val }));
+  const setO = (key: keyof OneShotForm) => (val: string) => setOneshot((p) => ({ ...p, [key]: val }));
 
   const setJMulti = (key: "regions" | "countries" | "languages") => (vals: string[]) => {
     if (key === "regions") {
-      setJourney((prev) => {
-        const newCountries = prev.countries.filter((c) => {
-          const entry = COUNTRIES.find((e) => e.value === c);
-          return entry && entry.regions.some((r) => vals.includes(r));
-        });
-        const newLanguages = prev.languages.filter((l) => {
-          const entry = LANGUAGES.find((e) => e.value === l);
-          return entry && entry.regions.some((r) => vals.includes(r));
-        });
-        return { ...prev, regions: vals, countries: newCountries, languages: newLanguages };
-      });
+      setJourney((p) => ({
+        ...p, regions: vals,
+        countries: p.countries.filter((c) => { const e = COUNTRIES.find((x) => x.value === c); return e && e.regions.some((r) => vals.includes(r)); }),
+        languages: p.languages.filter((l) => { const e = LANGUAGES.find((x) => x.value === l); return e && e.regions.some((r) => vals.includes(r)); }),
+      }));
     } else {
-      setJourney((prev) => ({ ...prev, [key]: vals }));
+      setJourney((p) => ({ ...p, [key]: vals }));
     }
   };
 
-  const setO = (key: keyof OneShotForm) => (val: string) =>
-    setOneshot((prev) => ({ ...prev, [key]: val }));
-
-  const filteredCountries = useMemo(() => {
-    if (journey.regions.length === 0) return COUNTRIES;
-    return COUNTRIES.filter((c) => c.regions.some((r) => journey.regions.includes(r)));
-  }, [journey.regions]);
-
-  const filteredLanguages = useMemo(() => {
-    if (journey.regions.length === 0) return LANGUAGES;
-    return LANGUAGES.filter((l) => l.regions.some((r) => journey.regions.includes(r)));
-  }, [journey.regions]);
-
-  const generatedNames = useMemo(() => {
-    if (mode !== "journey") return [];
-    const base = [
-      journey.brand,
-      journey.deliveryType,
-      journey.initiative,
-      journey.touchpoint,
-      journey.objective,
-      journey.channel,
-    ];
-    if (base.some((v) => !v)) return [];
-
-    const effCountries = journey.countries.length > 0 ? journey.countries : [""];
-    const effLanguages = journey.languages.length > 0 ? journey.languages : [""];
-
-    const names: string[] = [];
-    for (const country of effCountries) {
-      for (const lang of effLanguages) {
-        const region = country ? getCountryRegion(country) : (journey.regions[0] || "");
-        const parts = [
-          journey.brand,
-          journey.deliveryType,
-          journey.initiative,
-          journey.touchpoint,
-          journey.objective,
-          journey.channel,
-          region,
-          country,
-          lang,
-          journey.segment,
-          journey.plan,
-          journey.version,
-          journey.test,
-          journey.step,
-        ].filter(Boolean);
-        names.push(parts.join("_"));
-      }
+  const setOMulti = (key: "regions" | "countries" | "languages") => (vals: string[]) => {
+    if (key === "regions") {
+      setOneshot((p) => ({
+        ...p, regions: vals,
+        countries: p.countries.filter((c) => { const e = COUNTRIES.find((x) => x.value === c); return e && e.regions.some((r) => vals.includes(r)); }),
+        languages: p.languages.filter((l) => { const e = LANGUAGES.find((x) => x.value === l); return e && e.regions.some((r) => vals.includes(r)); }),
+      }));
+    } else {
+      setOneshot((p) => ({ ...p, [key]: vals }));
     }
-    return names;
-  }, [journey]);
+  };
 
-  const oneshotParts = useMemo(() => {
-    return [
-      { value: oneshot.brand, dim: "BRAND" },
-      { value: oneshot.deliveryType, dim: "TYPE" },
-      { value: oneshot.campaignType, dim: "CAMP.TYPE" },
-      { value: oneshot.campaignName, dim: "CAMP.NAME" },
-      { value: oneshot.objective, dim: "OBJECTIVE" },
-      { value: oneshot.channel, dim: "CHANNEL" },
-      { value: oneshot.region, dim: "REGION" },
-      { value: oneshot.country, dim: "COUNTRY" },
-      { value: oneshot.language, dim: "LANGUE" },
-      { value: oneshot.segment, dim: "SEGMENT" },
-      { value: oneshot.plan, dim: "PLAN" },
-      { value: oneshot.fiscalYear, dim: "FISCAL YEAR" },
-    ].filter((p) => p.value !== "");
-  }, [oneshot]);
+  const filteredCountriesJ = useMemo(() => journey.regions.length === 0 ? COUNTRIES : COUNTRIES.filter((c) => c.regions.some((r) => journey.regions.includes(r))), [journey.regions]);
+  const filteredLanguagesJ = useMemo(() => journey.regions.length === 0 ? LANGUAGES : LANGUAGES.filter((l) => l.regions.some((r) => journey.regions.includes(r))), [journey.regions]);
+  const filteredCountriesO = useMemo(() => oneshot.regions.length === 0 ? COUNTRIES : COUNTRIES.filter((c) => c.regions.some((r) => oneshot.regions.includes(r))), [oneshot.regions]);
+  const filteredLanguagesO = useMemo(() => oneshot.regions.length === 0 ? LANGUAGES : LANGUAGES.filter((l) => l.regions.some((r) => oneshot.regions.includes(r))), [oneshot.regions]);
 
-  const oneshotName = oneshotParts.map((p) => p.value).join("_");
+  const results = useMemo(() => computeResults(
+    mode === "journey" ? journey : null,
+    mode === "oneshot" ? oneshot : null,
+    mode
+  ), [journey, oneshot, mode]);
 
-  const handleCopy = (name: string, idx: number) => {
+  const tabLimits: Record<ResultTab, number> = { campaignName: 50, campaignCode: 128, assetAcronyms: 100, assetFull: 9999 };
+
+  const getTabNames = (tab: ResultTab): string[] => {
+    if (!results) return [];
+    if (tab === "campaignName") return results.campaignName ? [results.campaignName] : [];
+    if (tab === "campaignCode") return results.campaignCode ? [results.campaignCode] : [];
+    if (tab === "assetAcronyms") return results.assetAcronyms;
+    return results.assetFull;
+  };
+
+  const activeNames = getTabNames(activeTab);
+
+  const handleCopy = (name: string, key: string) => {
     navigator.clipboard.writeText(name).then(() => {
-      setCopiedIdx(idx);
+      setCopiedIdx(key);
       setTimeout(() => setCopiedIdx(null), 2000);
     });
   };
 
   const handleCopyAll = () => {
-    const all = mode === "journey" ? generatedNames : [oneshotName];
-    navigator.clipboard.writeText(all.join("\n")).then(() => {
+    const all = activeNames.join("\n");
+    navigator.clipboard.writeText(all).then(() => {
       setCopiedAll(true);
       setTimeout(() => setCopiedAll(false), 2000);
     });
   };
 
-  const handleReset = () => {
-    if (mode === "journey") {
-      setJourney({
-        brand: "",
-        deliveryType: "",
-        initiative: "",
-        touchpoint: "",
-        objective: "",
-        channel: "",
-        regions: [],
-        countries: [],
-        languages: [],
-        segment: "",
-        plan: "",
-        version: "",
-        test: "",
-        step: "",
-      });
-    } else {
-      setOneshot({
-        brand: "",
-        deliveryType: "OS",
-        campaignType: "",
-        campaignName: "",
-        objective: "",
-        channel: "",
-        region: "",
-        country: "",
-        language: "",
-        segment: "",
-        plan: "",
-        fiscalYear: "",
-      });
-    }
-  };
+  const tabConfig: { key: ResultTab; label: string; sublabel: string }[] = [
+    { key: "campaignName", label: "Campaign Name", sublabel: "≤50 car." },
+    { key: "campaignCode", label: "Campaign Code", sublabel: "≤128 car." },
+    { key: "assetAcronyms", label: "Asset Name", sublabel: "Acronymes ≤100" },
+    { key: "assetFull", label: "Asset Name", sublabel: "Complet" },
+  ];
 
-  const journeyMissingRequired =
-    !journey.brand ||
-    !journey.deliveryType ||
-    !journey.initiative ||
-    !journey.objective ||
-    !journey.channel;
-
-  const hasResults =
-    mode === "journey" ? generatedNames.length > 0 : oneshotName.length > 0;
+  const combos = mode === "journey"
+    ? journey.countries.length * journey.languages.length
+    : oneshot.countries.length * oneshot.languages.length;
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100">
-      <div className="max-w-5xl mx-auto px-4 py-10">
-
-        {/* Header */}
-        <div className="mb-10">
-          <div className="flex items-center gap-3 mb-2">
-            <div className="w-8 h-8 rounded-lg bg-blue-600 flex items-center justify-center">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M12 2L2 7l10 5 10-5-10-5z" />
-                <path d="M2 17l10 5 10-5" />
-                <path d="M2 12l10 5 10-5" />
-              </svg>
-            </div>
-            <h1 className="text-2xl font-bold text-white tracking-tight">CRM Naming Generator</h1>
+    <div className="min-h-screen bg-gray-50 text-gray-900">
+      {/* Top nav */}
+      <div className="border-b border-gray-100 bg-white shadow-xs">
+        <div className="max-w-6xl mx-auto px-6 py-4 flex items-center gap-3">
+          <div className="w-8 h-8 rounded-lg bg-indigo-600 flex items-center justify-center shadow-sm">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M12 2L2 7l10 5 10-5-10-5z" /><path d="M2 17l10 5 10-5" /><path d="M2 12l10 5 10-5" />
+            </svg>
           </div>
-          <p className="text-slate-400 text-sm ml-11">
-            Générez des noms d'assets CRM conformes à la nomenclature standardisée
-          </p>
+          <div>
+            <h1 className="text-base font-bold text-gray-900 leading-none">CRM Naming Generator</h1>
+            <p className="text-[11px] text-gray-400 mt-0.5">Nomenclature standardisée pour les assets CRM</p>
+          </div>
         </div>
+      </div>
 
-        {/* Mode selector */}
-        <div className="flex gap-2 mb-8">
-          <button
-            onClick={() => setMode("journey")}
-            className={`flex-1 py-3 px-4 rounded-xl text-sm font-semibold transition-all ${
-              mode === "journey"
-                ? "bg-blue-600 text-white shadow-lg shadow-blue-900/30"
-                : "bg-slate-800 text-slate-400 hover:bg-slate-700 hover:text-slate-200"
-            }`}
-          >
-            Journey / CRM Automatisé
-          </button>
-          <button
-            onClick={() => setMode("oneshot")}
-            className={`flex-1 py-3 px-4 rounded-xl text-sm font-semibold transition-all ${
-              mode === "oneshot"
-                ? "bg-blue-600 text-white shadow-lg shadow-blue-900/30"
-                : "bg-slate-800 text-slate-400 hover:bg-slate-700 hover:text-slate-200"
-            }`}
-          >
-            One Shot / Campagne
-          </button>
-        </div>
+      <div className="max-w-6xl mx-auto px-6 py-8">
+        <div className="grid grid-cols-1 lg:grid-cols-5 gap-8">
 
-        {/* Format reference */}
-        <div className="bg-slate-900 border border-slate-800 rounded-xl p-4 mb-8">
-          <p className="text-xs text-slate-500 uppercase tracking-widest font-semibold mb-2">
-            Format {mode === "journey" ? "Journey" : "One Shot"}
-          </p>
-          <p className="text-xs font-mono text-slate-400 leading-relaxed">
-            {mode === "journey"
-              ? "BRAND _ DELIVERY_TYPE _ INITIATIVE _ [TOUCHPOINT] _ OBJECTIVE _ CHANNEL _ REGION _ COUNTRY _ LANGUE _ [SEGMENT] _ [PLAN] _ [VERSION] _ [TEST] _ [STEP]"
-              : "BRAND _ DELIVERY_TYPE _ [CAMPAIGNTYPE] _ [CAMPAIGNNAME] _ OBJECTIVE _ CHANNEL _ REGION _ COUNTRY _ LANGUE _ [SEGMENT] _ [PLAN] _ [FISCAL_YEAR]"}
-          </p>
-        </div>
+          {/* ─── FORM PANEL ─── */}
+          <div className="lg:col-span-3 space-y-5">
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {/* Form */}
-          <div className="lg:col-span-2">
-            <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6">
+            {/* Mode tabs */}
+            <div className="bg-gray-100 rounded-xl p-1 flex gap-1">
+              {[
+                { key: "journey" as FormMode, label: "Journey / CRM Automatisé" },
+                { key: "oneshot" as FormMode, label: "One Shot / Campagne" },
+              ].map(({ key, label }) => (
+                <button
+                  key={key}
+                  onClick={() => setMode(key)}
+                  className={`flex-1 py-2.5 px-4 rounded-lg text-sm font-semibold transition-all ${
+                    mode === key ? "bg-white text-indigo-700 shadow-sm" : "text-gray-500 hover:text-gray-700"
+                  }`}
+                >
+                  {label}
+                </button>
+              ))}
+            </div>
+
+            {/* Format banner */}
+            <div className="bg-white rounded-xl border border-gray-100 px-4 py-3 shadow-xs">
+              <p className="text-[10px] text-gray-400 uppercase tracking-widest font-bold mb-1.5">Format {mode === "journey" ? "Journey" : "One Shot"}</p>
+              <p className="text-[11px] font-mono text-gray-500 leading-relaxed">
+                {mode === "journey"
+                  ? "BRAND _ TYPE _ INITIATIVE _ [TOUCHPOINT] _ OBJECTIVE _ CHANNEL _ REGION _ COUNTRY _ LANGUE _ [SEGMENT] _ [PLAN] _ [VERSION] _ [TEST] _ [STEP]"
+                  : "BRAND _ TYPE _ [PERIOD] _ [CAMP.TYPE] _ [CAMP.NAME] _ OBJECTIVE _ CHANNEL _ REGION _ COUNTRY _ LANGUE _ [SEGMENT] _ [PRODUCT] _ [VERSION] _ [TEST] _ [STEP]"}
+              </p>
+            </div>
+
+            {/* Form */}
+            <div className="bg-white rounded-2xl border border-gray-100 shadow-xs p-6">
               {mode === "journey" ? (
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-
-                  <div className="sm:col-span-2">
-                    <p className="text-xs font-semibold text-slate-500 uppercase tracking-widest mb-3 border-b border-slate-800 pb-2">
-                      Dimensions obligatoires
-                    </p>
-                  </div>
-
-                  <SelectField label="Brand" value={journey.brand} onChange={setJ("brand")} options={BRANDS} required description="Marque concernée" />
+                  <SectionDivider label="Dimensions obligatoires" />
+                  <SelectField label="Brand" value={journey.brand} onChange={setJ("brand")} options={BRANDS} required description="Marque" />
                   <SelectField label="Delivery Type" value={journey.deliveryType} onChange={setJ("deliveryType")} options={DELIVERY_TYPES.filter((d) => d.value !== "OS")} required description="Type d'envoi" />
-                  <SelectField label="Initiative" value={journey.initiative} onChange={setJ("initiative")} options={INITIATIVES} required description="Programme CRM global" />
-                  <SelectField label="Objective" value={journey.objective} onChange={setJ("objective")} options={OBJECTIVES} required description="Objectif marketing du message" />
+                  <SelectField label="Initiative" value={journey.initiative} onChange={setJ("initiative")} options={INITIATIVES} required description="Programme CRM" />
+                  <SelectField label="Objective" value={journey.objective} onChange={setJ("objective")} options={OBJECTIVES} required description="Objectif marketing" />
                   <SelectField label="Channel" value={journey.channel} onChange={setJ("channel")} options={CHANNELS} required description="Canal de communication" />
 
-                  <div className="sm:col-span-2 mt-2">
-                    <p className="text-xs font-semibold text-slate-500 uppercase tracking-widest mb-3 border-b border-slate-800 pb-2">
-                      Géographie — multi-sélection &amp; filtrage dynamique
-                    </p>
-                  </div>
-
+                  <SectionDivider label="Géographie — filtrage dynamique" />
                   <div className="sm:col-span-2">
-                    <MultiSelectField
-                      label="Region"
-                      values={journey.regions}
-                      onChange={setJMulti("regions")}
-                      options={REGIONS}
-                      required
-                      description="Zones géographiques — filtre dynamiquement Country et Langue"
-                    />
+                    <MultiSelectField label="Region" values={journey.regions} onChange={setJMulti("regions")} options={REGIONS} required description="Filtre les pays et langues disponibles" />
                   </div>
+                  <MultiSelectField label="Country" values={journey.countries} onChange={setJMulti("countries")} options={filteredCountriesJ} required description={journey.regions.length > 0 ? `Filtré sur : ${journey.regions.join(", ")}` : "Sélectionner une région"} emptyMessage="— Sélectionner une région d'abord —" />
+                  <MultiSelectField label="Langue" values={journey.languages} onChange={setJMulti("languages")} options={filteredLanguagesJ} required description={journey.regions.length > 0 ? `Filtré sur : ${journey.regions.join(", ")}` : "Sélectionner une région"} emptyMessage="— Sélectionner une région d'abord —" />
 
-                  <MultiSelectField
-                    label="Country"
-                    values={journey.countries}
-                    onChange={setJMulti("countries")}
-                    options={filteredCountries}
-                    required
-                    description={journey.regions.length > 0 ? `Filtrés sur : ${journey.regions.join(", ")}` : "Sélectionner une région d'abord"}
-                    emptyMessage="— Sélectionner une région d'abord —"
-                  />
-
-                  <MultiSelectField
-                    label="Langue"
-                    values={journey.languages}
-                    onChange={setJMulti("languages")}
-                    options={filteredLanguages}
-                    required
-                    description={journey.regions.length > 0 ? `Filtrées sur : ${journey.regions.join(", ")}` : "Sélectionner une région d'abord"}
-                    emptyMessage="— Sélectionner une région d'abord —"
-                  />
-
-                  {journey.countries.length > 0 && journey.languages.length > 0 && (
+                  {combos > 1 && (
                     <div className="sm:col-span-2">
-                      <div className="bg-blue-950/40 border border-blue-800/30 rounded-lg px-4 py-2.5 flex items-center gap-2">
-                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-blue-400 flex-shrink-0">
-                          <circle cx="12" cy="12" r="10" />
-                          <path d="M12 8v4M12 16h.01" />
-                        </svg>
-                        <p className="text-xs text-blue-300">
-                          <span className="font-semibold">{journey.countries.length * journey.languages.length} noms</span>{" "}
-                          seront générés ({journey.countries.length} pays x {journey.languages.length} langues)
+                      <div className="bg-indigo-50 border border-indigo-100 rounded-lg px-4 py-2.5 flex items-center gap-2">
+                        <span className="w-5 h-5 rounded-full bg-indigo-600 flex items-center justify-center flex-shrink-0">
+                          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5"><path d="M12 5v14M5 12h14" strokeLinecap="round" /></svg>
+                        </span>
+                        <p className="text-xs text-indigo-700">
+                          <span className="font-bold">{combos} asset names</span> seront générés ({journey.countries.length} pays × {journey.languages.length} langues)
                         </p>
                       </div>
                     </div>
                   )}
 
-                  <div className="sm:col-span-2 mt-4">
-                    <p className="text-xs font-semibold text-slate-500 uppercase tracking-widest mb-3 border-b border-slate-800 pb-2">
-                      Dimensions optionnelles
-                    </p>
-                  </div>
-
-                  <SelectField label="Touchpoint" value={journey.touchpoint} onChange={setJ("touchpoint")} options={TOUCHPOINTS} description="Numéro d'étape dans le journey" />
+                  <SectionDivider label="Dimensions optionnelles" />
+                  <SelectField label="Touchpoint" value={journey.touchpoint} onChange={setJ("touchpoint")} options={TOUCHPOINTS} description="Étape dans le journey" />
                   <SelectField label="Segment" value={journey.segment} onChange={setJ("segment")} options={SEGMENTS} description="Segment client" />
-                  <SelectField label="Plan" value={journey.plan} onChange={setJ("plan")} options={PLANS} description="Type de plan ou produit" />
+                  <SelectField label="Plan" value={journey.plan} onChange={setJ("plan")} options={PLANS} description="Type de plan" />
                   <SelectField label="Version" value={journey.version} onChange={setJ("version")} options={VERSIONS} description="Variante de contenu" />
-                  <SelectField label="Test" value={journey.test} onChange={setJ("test")} options={TESTS} description="Variante A/B test" />
-                  <SelectField label="Step" value={journey.step} onChange={setJ("step")} options={STEPS} description="Étape dans le journey" />
+                  <SelectField label="Test" value={journey.test} onChange={setJ("test")} options={TESTS} description="Variante A/B" />
+                  <SelectField label="Step" value={journey.step} onChange={setJ("step")} options={STEPS} description="Étape du journey" />
                 </div>
               ) : (
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div className="sm:col-span-2">
-                    <p className="text-xs font-semibold text-slate-500 uppercase tracking-widest mb-3 border-b border-slate-800 pb-2">
-                      Dimensions obligatoires
-                    </p>
-                  </div>
-                  <SelectField label="Brand" value={oneshot.brand} onChange={setO("brand")} options={BRANDS} required description="Marque concernée" />
-                  <SelectField label="Delivery Type" value={oneshot.deliveryType} onChange={setO("deliveryType")} options={DELIVERY_TYPES} required description="Type d'envoi (OS = One Shot)" />
-                  <SelectField label="Campaign Type" value={oneshot.campaignType} onChange={setO("campaignType")} options={CAMPAIGN_TYPES} description="Type de campagne" />
-                  <TextField label="Campaign Name" value={oneshot.campaignName} onChange={setO("campaignName")} description="Nom court de la campagne (ex: WIBYCBI)" placeholder="EX: BLACKFRIDAY" maxLength={20} />
+                  <SectionDivider label="Dimensions obligatoires" />
+                  <SelectField label="Brand" value={oneshot.brand} onChange={setO("brand")} options={BRANDS} required description="Marque" />
+                  <SelectField label="Delivery Type" value={oneshot.deliveryType} onChange={setO("deliveryType")} options={DELIVERY_TYPES} required description="Type d'envoi" />
                   <SelectField label="Objective" value={oneshot.objective} onChange={setO("objective")} options={OBJECTIVES} required description="Objectif marketing" />
                   <SelectField label="Channel" value={oneshot.channel} onChange={setO("channel")} options={CHANNELS} required description="Canal de communication" />
-                  <SelectField label="Region" value={oneshot.region} onChange={setO("region")} options={REGIONS} required description="Zone géographique" />
-                  <SelectField label="Country" value={oneshot.country} onChange={setO("country")} options={COUNTRIES} required description="Pays cible" />
-                  <SelectField label="Langue" value={oneshot.language} onChange={setO("language")} options={LANGUAGES} required description="Langue du contenu" />
-                  <div className="sm:col-span-2 mt-4">
-                    <p className="text-xs font-semibold text-slate-500 uppercase tracking-widest mb-3 border-b border-slate-800 pb-2">
-                      Dimensions optionnelles
-                    </p>
+
+                  <SectionDivider label="Géographie — filtrage dynamique" />
+                  <div className="sm:col-span-2">
+                    <MultiSelectField label="Region" values={oneshot.regions} onChange={setOMulti("regions")} options={REGIONS} required description="Filtre les pays et langues disponibles" />
+                  </div>
+                  <MultiSelectField label="Country" values={oneshot.countries} onChange={setOMulti("countries")} options={filteredCountriesO} required description={oneshot.regions.length > 0 ? `Filtré sur : ${oneshot.regions.join(", ")}` : "Sélectionner une région"} emptyMessage="— Sélectionner une région d'abord —" />
+                  <MultiSelectField label="Langue" values={oneshot.languages} onChange={setOMulti("languages")} options={filteredLanguagesO} required description={oneshot.regions.length > 0 ? `Filtré sur : ${oneshot.regions.join(", ")}` : "Sélectionner une région"} emptyMessage="— Sélectionner une région d'abord —" />
+
+                  {combos > 1 && (
+                    <div className="sm:col-span-2">
+                      <div className="bg-indigo-50 border border-indigo-100 rounded-lg px-4 py-2.5 flex items-center gap-2">
+                        <span className="w-5 h-5 rounded-full bg-indigo-600 flex items-center justify-center flex-shrink-0">
+                          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5"><path d="M12 5v14M5 12h14" strokeLinecap="round" /></svg>
+                        </span>
+                        <p className="text-xs text-indigo-700">
+                          <span className="font-bold">{combos} asset names</span> seront générés ({oneshot.countries.length} pays × {oneshot.languages.length} langues)
+                        </p>
+                      </div>
+                    </div>
+                  )}
+
+                  <SectionDivider label="Dimensions optionnelles" />
+                  <TextField label="Campaign Period" value={oneshot.campaignPeriod} onChange={setO("campaignPeriod")} description="Période de la campagne (ex: APR2026, Q2_2026)" placeholder="EX: APR2026" maxLength={12} />
+                  <SelectField label="Campaign Type" value={oneshot.campaignType} onChange={setO("campaignType")} options={CAMPAIGN_TYPES} description="Type de campagne" />
+                  <div className="sm:col-span-2">
+                    <TextField label="Campaign Name" value={oneshot.campaignName} onChange={setO("campaignName")} description="Nom court de la campagne (ex: BLACKFRIDAY)" placeholder="EX: BLACKFRIDAY" maxLength={25} />
                   </div>
                   <SelectField label="Segment" value={oneshot.segment} onChange={setO("segment")} options={SEGMENTS} description="Segment client" />
-                  <SelectField label="Plan" value={oneshot.plan} onChange={setO("plan")} options={PLANS} description="Type de plan ou produit" />
-                  <SelectField label="Fiscal Year" value={oneshot.fiscalYear} onChange={setO("fiscalYear")} options={FISCAL_YEARS} description="Année fiscale (reporting)" />
+                  <SelectField label="Product" value={oneshot.product} onChange={setO("product")} options={PRODUCTS} description="Produit concerné" />
+                  <SelectField label="Version" value={oneshot.version} onChange={setO("version")} options={VERSIONS} description="Variante de contenu" />
+                  <SelectField label="Test" value={oneshot.test} onChange={setO("test")} options={TESTS} description="Variante A/B" />
+                  <SelectField label="Step" value={oneshot.step} onChange={setO("step")} options={STEPS} description="Étape de la campagne" />
                 </div>
               )}
             </div>
           </div>
 
-          {/* Result panel */}
-          <div className="lg:col-span-1">
+          {/* ─── RESULTS PANEL ─── */}
+          <div className="lg:col-span-2">
             <div className="sticky top-6 space-y-4">
-              <div className="bg-slate-900 border border-slate-800 rounded-2xl p-5">
-                <div className="flex items-center justify-between mb-4">
-                  <p className="text-xs font-semibold text-slate-500 uppercase tracking-widest">
-                    {mode === "journey" && generatedNames.length > 1
-                      ? `${generatedNames.length} noms générés`
-                      : "Nom généré"}
-                  </p>
-                  {hasResults && (
-                    <button
-                      onClick={handleCopyAll}
-                      className={`text-xs px-3 py-1.5 rounded-lg font-semibold transition-all ${
-                        copiedAll
-                          ? "bg-green-600/20 text-green-400 border border-green-600/30"
-                          : "bg-slate-800 text-slate-300 hover:bg-slate-700 border border-slate-700"
-                      }`}
-                    >
-                      {copiedAll ? "Copié !" : "Copier tout"}
-                    </button>
-                  )}
+
+              {/* Result type tabs */}
+              <div className="bg-white rounded-2xl border border-gray-100 shadow-xs overflow-hidden">
+                <div className="grid grid-cols-4 border-b border-gray-100">
+                  {tabConfig.map(({ key, label, sublabel }) => {
+                    const names = getTabNames(key);
+                    const hasContent = names.length > 0;
+                    return (
+                      <button
+                        key={key}
+                        onClick={() => setActiveTab(key)}
+                        className={`flex flex-col items-center py-3 px-1 text-center transition-all border-b-2 ${
+                          activeTab === key
+                            ? "border-indigo-600 bg-indigo-50/50"
+                            : "border-transparent hover:bg-gray-50"
+                        }`}
+                      >
+                        <span className={`text-[10px] font-bold leading-tight ${activeTab === key ? "text-indigo-700" : "text-gray-600"}`}>{label}</span>
+                        <span className={`text-[9px] mt-0.5 ${activeTab === key ? "text-indigo-400" : "text-gray-400"}`}>{sublabel}</span>
+                        {hasContent && (
+                          <span className={`mt-1 w-1.5 h-1.5 rounded-full ${activeTab === key ? "bg-indigo-600" : "bg-gray-300"}`} />
+                        )}
+                      </button>
+                    );
+                  })}
                 </div>
 
-                {hasResults ? (
-                  <div className="space-y-2 max-h-[60vh] overflow-y-auto pr-1">
-                    {(mode === "journey" ? generatedNames : [oneshotName]).map((name, i) => {
-                      const isOver = name.length > 50;
-                      return (
-                        <div
-                          key={i}
-                          className={`group flex items-start gap-2 bg-slate-950 rounded-lg px-3 py-2.5 border transition-colors ${
-                            isOver ? "border-orange-500/40 hover:border-orange-500/60" : "border-slate-800 hover:border-slate-700"
-                          }`}
-                        >
-                          <span className={`font-mono text-xs break-all leading-relaxed flex-1 ${isOver ? "text-orange-300" : "text-blue-300"}`}>
-                            {name}
-                          </span>
-                          <div className="flex flex-col items-end gap-1 flex-shrink-0">
-                            <button
-                              onClick={() => handleCopy(name, i)}
-                              className={`text-xs px-2 py-1 rounded font-medium transition-all ${
-                                copiedIdx === i
-                                  ? "bg-green-600/20 text-green-400"
-                                  : "bg-slate-800 text-slate-400 hover:text-slate-200 opacity-0 group-hover:opacity-100"
-                              }`}
-                            >
-                              {copiedIdx === i ? "✓" : "Copier"}
-                            </button>
-                            <span className={`text-[10px] font-mono ${isOver ? "text-orange-500" : "text-slate-600"}`}>
-                              {name.length}c{isOver ? " !" : ""}
-                            </span>
-                          </div>
+                <div className="p-4">
+                  {results ? (
+                    activeNames.length > 0 ? (
+                      <>
+                        <div className="flex items-center justify-between mb-3">
+                          <p className="text-[11px] text-gray-400">
+                            {activeNames.length === 1 ? "1 résultat" : `${activeNames.length} résultats`}
+                          </p>
+                          <button
+                            onClick={handleCopyAll}
+                            className={`text-[11px] px-3 py-1.5 rounded-lg font-semibold transition-all ${
+                              copiedAll ? "bg-emerald-100 text-emerald-700" : "bg-gray-100 text-gray-600 hover:bg-indigo-50 hover:text-indigo-700"
+                            }`}
+                          >
+                            {copiedAll ? "Copié !" : "Tout copier"}
+                          </button>
                         </div>
-                      );
-                    })}
-                  </div>
-                ) : (
-                  <div className="text-center py-8">
-                    <div className="w-12 h-12 rounded-xl bg-slate-800 flex items-center justify-center mx-auto mb-3">
-                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="text-slate-600">
-                        <path d="M12 5v14M5 12h14" strokeLinecap="round" />
-                      </svg>
+                        <div className="space-y-2 max-h-[55vh] overflow-y-auto pr-1">
+                          {activeNames.map((name, i) => (
+                            <ResultCard
+                              key={i}
+                              name={name}
+                              onCopy={() => handleCopy(name, `${activeTab}-${i}`)}
+                              copied={copiedIdx === `${activeTab}-${i}`}
+                              limit={tabLimits[activeTab]}
+                            />
+                          ))}
+                        </div>
+                      </>
+                    ) : (
+                      <div className="text-center py-8">
+                        <div className="w-10 h-10 rounded-xl bg-gray-100 flex items-center justify-center mx-auto mb-2">
+                          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="text-gray-400">
+                            <path d="M12 5v14M5 12h14" strokeLinecap="round" />
+                          </svg>
+                        </div>
+                        <p className="text-sm text-gray-400">
+                          {activeTab === "assetAcronyms" || activeTab === "assetFull"
+                            ? "Sélectionnez des pays et langues\npour générer les asset names"
+                            : "En cours de génération…"}
+                        </p>
+                      </div>
+                    )
+                  ) : (
+                    <div className="text-center py-10">
+                      <div className="w-12 h-12 rounded-2xl bg-indigo-50 flex items-center justify-center mx-auto mb-3">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="text-indigo-400">
+                          <path d="M12 2L2 7l10 5 10-5-10-5z" /><path d="M2 17l10 5 10-5" /><path d="M2 12l10 5 10-5" />
+                        </svg>
+                      </div>
+                      <p className="text-sm font-medium text-gray-500 mb-1">Remplissez le formulaire</p>
+                      <p className="text-xs text-gray-400">Les 4 types de noms apparaîtront ici</p>
                     </div>
-                    <p className="text-slate-500 text-sm">
-                      {mode === "journey" && journeyMissingRequired
-                        ? "Remplissez les champs obligatoires"
-                        : "Sélectionnez des pays et langues\npour générer les noms"}
-                    </p>
-                  </div>
-                )}
+                  )}
+                </div>
               </div>
 
-              {hasResults && (
+              {/* Reset */}
+              {results && (
                 <button
-                  onClick={handleReset}
-                  className="w-full py-2 rounded-xl text-sm text-slate-400 hover:text-slate-200 hover:bg-slate-800 transition-all"
+                  onClick={() => {
+                    if (mode === "journey") setJourney({ brand: "", deliveryType: "", initiative: "", touchpoint: "", objective: "", channel: "", regions: [], countries: [], languages: [], segment: "", plan: "", version: "", test: "", step: "" });
+                    else setOneshot({ brand: "", deliveryType: "OS", campaignPeriod: "", campaignType: "", campaignName: "", objective: "", channel: "", regions: [], countries: [], languages: [], segment: "", product: "", version: "", test: "", step: "" });
+                  }}
+                  className="w-full py-2 rounded-xl text-sm text-gray-400 hover:text-gray-600 hover:bg-white hover:shadow-xs border border-transparent hover:border-gray-100 transition-all"
                 >
-                  Réinitialiser
+                  Réinitialiser le formulaire
                 </button>
               )}
 
-              {/* Examples */}
-              <div className="bg-slate-900 border border-slate-800 rounded-xl p-4">
-                <p className="text-xs font-semibold text-slate-500 uppercase tracking-widest mb-3">
-                  Exemples de noms valides
-                </p>
+              {/* Reference examples */}
+              <div className="bg-white rounded-xl border border-gray-100 shadow-xs p-4">
+                <p className="text-[10px] font-bold uppercase tracking-widest text-gray-400 mb-3">Exemples de référence</p>
                 <div className="space-y-2">
                   {["VK_AUT_MCL_100_ONB_EM_NA_CA_EN_B2B_FY26", "SP_OS_CO_PRM_IA_NA_US_EN_WIBYCBI_AP_2026"].map((ex) => (
-                    <button
-                      key={ex}
-                      onClick={() => navigator.clipboard.writeText(ex)}
-                      className="w-full text-left font-mono text-xs text-slate-400 bg-slate-950 hover:text-blue-300 px-3 py-2 rounded-lg transition-colors border border-slate-800 hover:border-slate-700 break-all"
+                    <button key={ex} onClick={() => navigator.clipboard.writeText(ex)}
+                      className="w-full text-left font-mono text-[11px] text-gray-400 hover:text-indigo-600 bg-gray-50 hover:bg-indigo-50 px-3 py-2 rounded-lg transition-colors border border-gray-100 hover:border-indigo-200 break-all"
                       title="Cliquer pour copier"
-                    >
-                      {ex}
-                    </button>
+                    >{ex}</button>
                   ))}
                 </div>
               </div>
