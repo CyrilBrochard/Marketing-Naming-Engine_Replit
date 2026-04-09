@@ -1,0 +1,31 @@
+kind = "web"
+previewPath = "/"
+title = "CRM Naming Generator"
+version = "1.0.0"
+id = "artifacts/naming-generator"
+router = "path"
+
+[[integratedSkills]]
+name = "react-vite"
+version = "1.0.0"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 26157
+
+[services.development]
+run = "pnpm --filter @workspace/naming-generator run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/naming-generator", "run", "build" ]
+publicDir = "artifacts/naming-generator/dist/public"
+serve = "static"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "26157"
+BASE_PATH = "/"

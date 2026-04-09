@@ -1,0 +1,1370 @@
+Date: Thu, 9 Apr 2026 13:40:48 +0000 (UTC)
+Message-ID: <861843686.119.1775742048777@39f8c50f0e7b>
+Subject: Exported From Confluence
+MIME-Version: 1.0
+Content-Type: multipart/related; 
+	boundary="----=_Part_118_317897081.1775742048777"
+
+------=_Part_118_317897081.1775742048777
+Content-Type: text/html; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+Content-Location: file:///C:/exported.html
+
+<html xmlns:o=3D'urn:schemas-microsoft-com:office:office'
+      xmlns:w=3D'urn:schemas-microsoft-com:office:word'
+      xmlns:v=3D'urn:schemas-microsoft-com:vml'
+      xmlns=3D'urn:w3-org-ns:HTML'>
+<head>
+    <meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Dutf-8=
+">
+    <title>CRM Naming Convention</title>
+    <!--[if gte mso 9]>
+    <xml>
+        <o:OfficeDocumentSettings>
+            <o:TargetScreenSize>1024x640</o:TargetScreenSize>
+            <o:PixelsPerInch>72</o:PixelsPerInch>
+            <o:AllowPNG/>
+        </o:OfficeDocumentSettings>
+        <w:WordDocument>
+            <w:View>Print</w:View>
+            <w:Zoom>90</w:Zoom>
+            <w:DoNotOptimizeForBrowser/>
+        </w:WordDocument>
+    </xml>
+    <![endif]-->
+    <style>
+                <!--
+        @page Section1 {
+            size: 8.5in 11.0in;
+            margin: 1.0in;
+            mso-header-margin: .5in;
+            mso-footer-margin: .5in;
+            mso-paper-source: 0;
+        }
+
+        table {
+            border: solid 1px;
+            border-collapse: collapse;
+        }
+
+        table td, table th {
+            border: solid 1px;
+            padding: 5px;
+        }
+
+        td {
+            page-break-inside: avoid;
+        }
+
+        tr {
+            page-break-after: avoid;
+        }
+
+        div.Section1 {
+            page: Section1;
+        }
+
+        /* Confluence print stylesheet. Common to all themes for print medi=
+a */
+/* Full of !important until we improve batching for print CSS */
+
+@media print {
+    #main {
+        padding-bottom: 1em !important; /* The default padding of 6em is to=
+o much for printouts */
+    }
+
+    body {
+        font: var(--ds-font-body-small, Arial, Helvetica, FreeSans, sans-se=
+rif);
+    }
+
+    body, #full-height-container, #main, #page, #content, .has-personal-sid=
+ebar #content {
+        background: var(--ds-surface, #fff) !important;
+        color: var(--ds-text, #000) !important;
+        border: 0 !important;
+        width: 100% !important;
+        height: auto !important;
+        min-height: auto !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        display: block !important;
+    }
+
+    a, a:link, a:visited, a:focus, a:hover, a:active {
+        color: var(--ds-text, #000);
+    }
+
+    #content h1,
+    #content h2,
+    #content h3,
+    #content h4,
+    #content h5,
+    #content h6 {
+        page-break-after: avoid;
+    }
+
+    pre {
+        font: var(--ds-font-code, Monaco, "Courier New", monospace);
+    }
+
+    #header,
+    .aui-header-inner,
+    #navigation,
+    #sidebar,
+    .sidebar,
+    #personal-info-sidebar,
+    .ia-fixed-sidebar,
+    .page-actions,
+    .navmenu,
+    .ajs-menu-bar,
+    .noprint,
+    .inline-control-link,
+    .inline-control-link a,
+    a.show-labels-editor,
+    .global-comment-actions,
+    .comment-actions,
+    .quick-comment-container,
+    #addcomment {
+        display: none !important;
+    }
+
+    /* CONF-28544 cannot print multiple pages in IE */
+    #splitter-content {
+        position: relative !important;
+    }
+
+    .comment .date::before {
+        content: none !important; /* remove middot for print view */
+    }
+
+    h1.pagetitle img {
+        height: auto;
+        width: auto;
+    }
+
+    .print-only {
+        display: block;
+    }
+
+    #footer {
+        position: relative !important; /* CONF-17506 Place the footer at en=
+d of the content */
+        margin: 0;
+        padding: 0;
+        background: none;
+        clear: both;
+    }
+
+    #poweredby {
+        border-top: none;
+        background: none;
+    }
+
+    #poweredby li.print-only {
+        display: list-item;
+        font-style: italic;
+    }
+
+    #poweredby li.noprint {
+        display: none;
+    }
+
+    /* no width controls in print */
+    .wiki-content .table-wrap,
+    .wiki-content p,
+    .panel .codeContent,
+    .panel .codeContent pre,
+    .image-wrap {
+        overflow: visible !important;
+    }
+
+    /* TODO - should this work? */
+    #children-section,
+    #comments-section .comment,
+    #comments-section .comment .comment-body,
+    #comments-section .comment .comment-content,
+    #comments-section .comment p {
+        page-break-inside: avoid;
+    }
+
+    #page-children a {
+        text-decoration: none;
+    }
+
+    /**
+     hide twixies
+
+     the specificity here is a hack because print styles
+     are getting loaded before the base styles. */
+    #comments-section.pageSection .section-header,
+    #comments-section.pageSection .section-title,
+    #children-section.pageSection .section-header,
+    #children-section.pageSection .section-title,
+    .children-show-hide {
+        padding-left: 0;
+        margin-left: 0;
+    }
+
+    .children-show-hide.icon {
+        display: none;
+    }
+
+    /* personal sidebar */
+    .has-personal-sidebar #content {
+        margin-right: 0px;
+    }
+
+    .has-personal-sidebar #content .pageSection {
+        margin-right: 0px;
+    }
+
+    .no-print, .no-print * {
+        display: none !important;
+    }
+}
+-->
+    </style>
+</head>
+<body>
+    <h1>CRM Naming Convention</h1>
+    <div class=3D"Section1">
+        <div class=3D"contentLayout2">
+<style>[data-colorid=3Dtue04iutk2]{color:#0747a6} html[data-color-mode=3Dda=
+rk] [data-colorid=3Dtue04iutk2]{color:#5999f8}[data-colorid=3Dzhwk5zzzav]{c=
+olor:#0747a6} html[data-color-mode=3Ddark] [data-colorid=3Dzhwk5zzzav]{colo=
+r:#5999f8}[data-colorid=3Dsm5tyq0jen]{color:#0747a6} html[data-color-mode=
+=3Ddark] [data-colorid=3Dsm5tyq0jen]{color:#5999f8}[data-colorid=3Dpjshsb9r=
+p2]{color:#0747a6} html[data-color-mode=3Ddark] [data-colorid=3Dpjshsb9rp2]=
+{color:#5999f8}[data-colorid=3Djo7fp5z7ie]{color:#0747a6} html[data-color-m=
+ode=3Ddark] [data-colorid=3Djo7fp5z7ie]{color:#5999f8}[data-colorid=3Durlio=
+kw7xq]{color:#0747a6} html[data-color-mode=3Ddark] [data-colorid=3Durliokw7=
+xq]{color:#5999f8}[data-colorid=3Dyl2xoe9dyr]{color:#0747a6} html[data-colo=
+r-mode=3Ddark] [data-colorid=3Dyl2xoe9dyr]{color:#5999f8}[data-colorid=3Drg=
+c6s8rpcm]{color:#0747a6} html[data-color-mode=3Ddark] [data-colorid=3Drgc6s=
+8rpcm]{color:#5999f8}[data-colorid=3Daf5njxn34a]{color:#0747a6} html[data-c=
+olor-mode=3Ddark] [data-colorid=3Daf5njxn34a]{color:#5999f8}[data-colorid=
+=3Do7a4bymx5h]{color:#0747a6} html[data-color-mode=3Ddark] [data-colorid=3D=
+o7a4bymx5h]{color:#5999f8}</style>
+<div class=3D"columnLayout two-equal" data-layout=3D"two-equal">
+<div class=3D"cell normal" data-type=3D"normal">
+<div class=3D"innerCell">
+<h2 local-id=3D"bd90cad9d308" id=3D"CRMNamingConvention-Introduction=E2=80=
+=93Pourquoicr=C3=A9eretmaintenirunenomenclatureCRMadapt=C3=A9e">Introductio=
+n =E2=80=93 Pourquoi cr=C3=A9er et maintenir une nomenclature CRM adapt=C3=
+=A9e<em><strong>&nbsp;</strong></em></h2>
+<ol start=3D"1" local-id=3D"648dd3b5303b">
+<li local-id=3D"c3432a454f85">
+<p local-id=3D"37ae782bdfeb"><em><strong><span data-colorid=3D"o7a4bymx5h">=
+La logique n=E2=80=99est pas universelle&nbsp;</span></strong></em></p></li=
+>
+</ol>
+<p local-id=3D"059fbd17dd71">Dans un CRM, chaque communication =E2=80=94 qu=
+=E2=80=99il s=E2=80=99agisse d=E2=80=99un email, SMS, push, In-App, Inbox, =
+envoy=C3=A9e via un Journey automatis=C3=A9, une campagne one-shot ou un en=
+voi transactionnel =E2=80=94 correspond =C3=A0 un objectif marketing pr=C3=
+=A9cis, =C3=A0 un public sp=C3=A9cifique et =C3=A0 un contexte business par=
+ticulier. La logique de nommage n=E2=80=99est pas universelle : ce qui a du=
+ sens pour une =C3=A9quipe produit ne l=E2=80=99est pas forc=C3=A9ment pour=
+ le marketing, l'Analytics ou le reporting. Une nomenclature claire permet =
+de parler un langage commun entre toutes les =C3=A9quipes et membres d=E2=
+=80=99une m=C3=AAme =C3=A9quipe et de r=C3=A9duire les risques de confusion=
+.&nbsp;</p>
+<ol start=3D"2" local-id=3D"bfb47018-f158-441e-936e-9e50de1c8aa1">
+<li local-id=3D"1e25b0d9-5c5c-494c-9636-6c684f6d3d88">
+<p local-id=3D"2f6e8076d983"><em><strong><span data-colorid=3D"pjshsb9rp2">=
+Lisibilit=C3=A9 et efficacit=C3=A9 op=C3=A9rationnelle&nbsp;</span></strong=
+></em></p></li>
+</ol>
+<p local-id=3D"acc1d1f94e5e">Une nomenclature structur=C3=A9e permet de :<c=
+ode>&nbsp;</code><br>
+Rep=C3=A9rer instantan=C3=A9ment la nature, le canal et l=E2=80=99objectif =
+de chaque communication ;&nbsp;</p>
+<ul local-id=3D"50e3be38-1996-4334-a7bf-7cb79336e5aa">
+<li local-id=3D"bf9b8722-a0e2-4336-a344-80c547972430">
+<p local-id=3D"d4dd7a00cded">Identifier le <strong>parcours complet d=E2=80=
+=99un client</strong> =C3=A0 travers une initiative ou une campagne, m=C3=
+=AAme lorsqu=E2=80=99il traverse plusieurs Journeys ou types d=E2=80=99envo=
+is ;&nbsp;</p></li>
+</ul>
+<ul local-id=3D"9077350a-6aa1-4453-8bff-46819b2369ae">
+<li local-id=3D"772d0bba-1b5f-4e5d-ba28-68a98f5d93f2">
+<p local-id=3D"6d5c411e77af">Faciliter l=E2=80=99ajout ou la modification d=
+=E2=80=99=C3=A9tapes, de messages ou de nouveaux parcours sans casser la lo=
+gique existante.&nbsp;</p></li>
+</ul>
+<p local-id=3D"3ab99358ceb3">Sans nomenclature standardis=C3=A9e, la multip=
+lication des Journeys, des campagnes one-shot, des variantes r=C3=A9gionale=
+s, des versions et des tests rend le CRM illisible et les dashboards peu fi=
+ables.&nbsp;</p>
+<ol start=3D"3" local-id=3D"681743d4-012c-4354-9a8a-3b1a4a596e9b">
+<li local-id=3D"c9d49a20-e0b8-42bc-b02f-994af8fb14cf">
+<p local-id=3D"c344b6dd04c1"><em><strong><span data-colorid=3D"rgc6s8rpcm">=
+P=C3=A9rennit=C3=A9 et =C3=A9volutivit=C3=A9&nbsp;</span></strong></em></p>=
+</li>
+</ol>
+<p local-id=3D"f239b414427c">Une nomenclature robuste ne sert pas seulement=
+ aujourd=E2=80=99hui : elle doit =C3=A9voluer avec l=E2=80=99entreprise. Le=
+s nouvelles initiatives, =C3=A9tapes, campagnes saisonni=C3=A8res, gammes p=
+roduits ou acquisitions doivent pouvoir =C3=AAtre int=C3=A9gr=C3=A9es sans =
+perturber l=E2=80=99ordre ni l=E2=80=99historique des communications exista=
+ntes.&nbsp;</p>
+<ol start=3D"4" local-id=3D"4c73a986-c5a9-4d3d-9258-b75654c249b5">
+<li local-id=3D"5387880f-7bac-45f6-93c8-9d2fad79b147">
+<p local-id=3D"bdd3bba59169"><em><strong><span data-colorid=3D"tue04iutk2">=
+Alignement avec le reporting et la strat=C3=A9gie CRM&nbsp;</span></strong>=
+</em></p></li>
+</ol>
+<p local-id=3D"92aed5eae6e4">Les dimensions choisies dans la nomenclature d=
+oivent :&nbsp;</p>
+<p local-id=3D"de3687609fff">Refl=C3=A9ter les objectifs marketing et le ci=
+blage (OBJECTIVE, AUDIENCE, SEGMENT, PLAN) ;&nbsp;</p>
+<p local-id=3D"afd3bcf8ca5e">Permettre un suivi clair des campagnes et des =
+Journeys pour analyser le ROI et la performance ;&nbsp;</p>
+<p local-id=3D"65a28515e20f">Assurer que chaque communication peut =C3=AAtr=
+e reli=C3=A9e =C3=A0 une initiative globale, =C3=A0 son ordre logique et =
+=C3=A0 un canal sp=C3=A9cifique (INITIATIVE, FLOWSTEP, STEP, PHASE, CHANNEL=
+, PREFIX).&nbsp;</p>
+<ol start=3D"5" local-id=3D"14cda379-0cd2-48a7-be17-e5778bbfb0be">
+<li local-id=3D"5bc64858-5921-4141-8ccb-bdb0b251bb03">
+<p local-id=3D"3bbd8039e8ec"><em><strong><span data-colorid=3D"jo7fp5z7ie">=
+Objectif de ce document&nbsp;</span></strong></em></p></li>
+</ol>
+<p local-id=3D"a7c089d9f5c6">Ce document a pour objectif de :&nbsp;</p>
+<ol start=3D"1" local-id=3D"40e00a1c-153e-4ef6-85ec-4c77f65cc5d4">
+<li local-id=3D"8c59f196-a821-4da9-bd88-0053bd6dae06">
+<p local-id=3D"e410363d7429">D=C3=A9finir les dimensions essentielles pour =
+toutes les communications CRM (Email, SMS, Push, In-App, Inbox) ;&nbsp;</p>=
+</li>
+</ol>
+<ol start=3D"2" local-id=3D"ce6f2fd1-a4bc-4191-8397-e55e027f62b3">
+<li local-id=3D"a49f708e-2456-45ab-826c-188078a63d0d">
+<p local-id=3D"6d831f8a1230">D=C3=A9crire les valeurs standardis=C3=A9es po=
+ssibles pour chaque dimension afin d=E2=80=99assurer coh=C3=A9rence et scal=
+abilit=C3=A9 ;&nbsp;</p></li>
+</ol>
+<ol start=3D"3" local-id=3D"950e08b0-3b9a-43b4-9604-3fa42910b3bd">
+<li local-id=3D"4801ad73-4b34-4c7f-83bb-da369d395803">
+<p local-id=3D"2f21264f6f20">Fournir un r=C3=A9f=C3=A9rentiel unique pour t=
+outes les =C3=A9quipes marketing et CRM afin d=E2=80=99=C3=A9viter ambigu=
+=C3=AFt=C3=A9s et doublons.&nbsp;</p></li>
+</ol>
+</div>
+</div>
+<div class=3D"cell normal" data-type=3D"normal">
+<div class=3D"innerCell">
+<h2 local-id=3D"9a07db96bb02" id=3D"CRMNamingConvention-Processusded=C3=A9c=
+ision=E2=80=93Commentchoisirunedimensiondenomenclature">Processus de d=C3=
+=A9cision =E2=80=93 Comment choisir une dimension de nomenclature&nbsp;</h2=
+>
+<h2 local-id=3D"1fac55756491" id=3D"CRMNamingConvention-Objectif:"><em>Obje=
+ctif:&nbsp;</em></h2>
+<p local-id=3D"c9ccb9f06b42">D=C3=A9terminer si une information m=C3=A9tier=
+ doit devenir une dimension officielle de nomenclature, en v=C3=A9rifiant q=
+u=E2=80=99elle respecte les trois principes :<code>&nbsp;</code><br>
+=F0=9F=91=89 Intemporel<code>&nbsp;</code><br>
+=F0=9F=91=89 Scalable<code>&nbsp;</code><br>
+=F0=9F=91=89 Lisible<code>&nbsp;</code><br>
+Ce processus s=E2=80=99applique =C3=A0 toutes les communications CRM : Jour=
+neys, Emails one-shot, Transactionnels, SMS, Push, In-App.&nbsp;</p>
+<ol start=3D"1" local-id=3D"b37dcc37-4ce9-4367-8288-d5f42faa6a63">
+<li local-id=3D"e5b4b586-cc23-4715-9655-b1e36497631f">
+<p local-id=3D"b4acd798d551"><em><strong><span data-colorid=3D"zhwk5zzzav">=
+V=C3=A9rifier le besoin m=C3=A9tier&nbsp;</span></strong></em></p></li>
+</ol>
+<p local-id=3D"d33bb0c0c2d1">Une dimension n=E2=80=99existe que si elle r=
+=C3=A9pond =C3=A0 une question business r=C3=A9elle : reporting, analyse de=
+ performance, segmentation ou suivi d=E2=80=99initiative.<code>&nbsp;</code=
+><br>
+Si aucune d=C3=A9cision m=C3=A9tier ne d=C3=A9pend de cette information, el=
+le ne doit pas =C3=AAtre int=C3=A9gr=C3=A9e dans le nom d=E2=80=99un asset.=
+&nbsp;</p>
+<ol start=3D"2" local-id=3D"dc200b94-46b4-4f72-85a5-a9ec57da90f3">
+<li local-id=3D"946a3d1f-ea05-4587-abcf-94012f8d9aa8">
+<p local-id=3D"ac6e71290448"><em><strong><span data-colorid=3D"urliokw7xq">=
+Tester les trois principes fondamentaux&nbsp;</span></strong></em></p></li>
+</ol>
+<p local-id=3D"b31b3fb6e3df"><strong>Intemporel :</strong><code>&nbsp;</cod=
+e><br>
+La dimension doit rester pertinente dans le temps et ne pas d=C3=A9pendre d=
+=E2=80=99un contexte temporaire ou d=E2=80=99un jargon interne.<code>&nbsp;=
+</code><br><strong>Scalable :</strong><code>&nbsp;</code><br>
+La dimension doit pouvoir supporter la croissance du CRM : nouvelles marque=
+s, initiatives, pays, canaux ou produits, sans n=C3=A9cessiter de renommer =
+les assets existants.<code>&nbsp;</code><br><strong>Lisible :</strong><code=
+>&nbsp;</code><br>
+La dimension doit =C3=AAtre comprise imm=C3=A9diatement par marketing, CRM,=
+ analytics et direction, sans interpr=C3=A9tation ni documentation complexe=
+.&nbsp;</p>
+<ol start=3D"3" local-id=3D"f0fe4b1b-ff8c-4159-a16b-6a81b16e4001">
+<li local-id=3D"447c6ad1-a838-4c76-a6b4-e3053d3769a1">
+<p local-id=3D"73450520d63b"><em><strong><span data-colorid=3D"sm5tyq0jen">=
+V=C3=A9rifier la valeur analytique&nbsp;</span></strong></em></p></li>
+</ol>
+<p local-id=3D"2eb70747d713">Une dimension doit permettre une analyse concr=
+=C3=A8te : comparaison de performance, suivi ROI, segmentation client ou le=
+cture d=E2=80=99un parcours CRM.<code>&nbsp;</code><br>
+Sinon elle ajoute de la complexit=C3=A9 sans valeur.&nbsp;</p>
+<ol start=3D"4" local-id=3D"ab490f12-241e-47f4-86ab-3b53c51b2871">
+<li local-id=3D"20fdb1dd-2a29-46b7-a5ba-805846ee13b2">
+<p local-id=3D"912fb02ef516"><em><strong><span data-colorid=3D"af5njxn34a">=
+D=C3=A9terminer si la dimension est obligatoire ou optionnelle&nbsp;</span>=
+</strong></em></p></li>
+</ol>
+<p local-id=3D"fcdeb5d519bd">Si la dimension est pertinente dans la majorit=
+=C3=A9 des communications, elle est obligatoire.<code>&nbsp;</code><br>
+Sinon elle reste optionnelle afin de pr=C3=A9server la lisibilit=C3=A9 des =
+noms.&nbsp;</p>
+<ol start=3D"5" local-id=3D"3a36b8fc-bf0e-479a-9dbf-5f0db70c5e9a">
+<li local-id=3D"49d2e96b-1873-4a7c-8bbd-bb2ebd8cd599">
+<p local-id=3D"308f151cecec"><em><strong><span data-colorid=3D"yl2xoe9dyr">=
+Valider sur des cas r=C3=A9els&nbsp;</span></strong></em></p></li>
+</ol>
+<p local-id=3D"9e641c144e0c">La dimension doit fonctionner pour tous les ty=
+pes de communications CRM : Journeys, campagnes one-shot, transactionnels, =
+SMS, Push ou In-App.<code>&nbsp;</code><br>
+Si elle cr=C3=A9e de la confusion dans un cas r=C3=A9el, elle doit =C3=AAtr=
+e revue.&nbsp;</p>
+<p local-id=3D"ef5ac7d659c3"><em>POURQUOI ?&nbsp;</em></p>
+<p local-id=3D"b6a8607a7efe">Ce processus garantit que chaque dimension de =
+la nomenclature respecte les principes d=E2=80=99intemporalit=C3=A9, de sca=
+labilit=C3=A9 et de lisibilit=C3=A9, et qu=E2=80=99elle apporte une valeur =
+concr=C3=A8te au reporting et =C3=A0 la compr=C3=A9hension des communicatio=
+ns CRM</p>
+</div>
+</div>
+</div>
+<div class=3D"columnLayout fixed-width" data-layout=3D"fixed-width">
+<div class=3D"cell normal" data-type=3D"normal">
+<div class=3D"innerCell">
+<p local-id=3D"224bb5c55fe2"><br><strong>D=C3=A9finition des dimensions de =
+la nomenclature=E2=80=AF:&nbsp;&nbsp;&nbsp;&nbsp; </strong></p>
+<p local-id=3D"9df78a7fae8d"><strong>&nbsp; </strong></p>
+<div id=3D"expander-891321972" class=3D"expand-container">
+<div id=3D"expander-control-891321972" class=3D"expand-control">
+<span class=3D"expand-control-icon"><img style=3D"vertical-align:middle;" c=
+lass=3D"expand-control-image" src=3D"7381823a818db2558f8996b84830a55aff3bd0=
+090f3cb21d8c64f5e03352c51d" width=3D"16" height=3D"16"></span><span class=
+=3D"expand-control-text">Cliquez ici pour d=C3=A9velopper...</span>
+</div>
+<div id=3D"expander-content-891321972" class=3D"expand-content">
+<iframe src=3D"https://cyrilbrochard.github.io/generator-Naming_Convention/=
+" width=3D"100%" height=3D"800" frameborder=3D"1" sandbox=3D"allow-forms al=
+low-modals allow-orientation-lock allow-pointer-lock allow-popups allow-pop=
+ups-to-escape-sandbox allow-presentation allow-same-origin allow-scripts al=
+low-top-navigation-by-user-activation"> </iframe>
+</div>
+</div>
+<div class=3D"table-wrap">
+<table data-table-width=3D"2207" data-layout=3D"center" data-local-id=3D"12=
+bbef17-7767-42ca-a84f-5c37c928973b" data-table-display-mode=3D"default" cla=
+ss=3D"confluenceTable">
+<colgroup>
+<col style=3D"width: 92.0px;">
+<col style=3D"width: 73.0px;">
+<col style=3D"width: 73.0px;">
+<col style=3D"width: 73.0px;">
+<col style=3D"width: 110.0px;">
+<col style=3D"width: 60.0px;">
+<col style=3D"width: 120.0px;">
+<col style=3D"width: 64.0px;">
+<col style=3D"width: 98.0px;">
+<col style=3D"width: 60.0px;">
+<col style=3D"width: 196.0px;">
+<col style=3D"width: 60.0px;">
+<col style=3D"width: 139.0px;">
+<col style=3D"width: 60.0px;">
+<col style=3D"width: 60.0px;">
+<col style=3D"width: 60.0px;">
+<col style=3D"width: 63.0px;">
+<col style=3D"width: 60.0px;">
+<col style=3D"width: 60.0px;">
+<col style=3D"width: 60.0px;">
+<col style=3D"width: 67.0px;">
+<col style=3D"width: 60.0px;">
+<col style=3D"width: 60.0px;">
+<col style=3D"width: 60.0px;">
+<col style=3D"width: 60.0px;">
+<col style=3D"width: 60.0px;">
+<col style=3D"width: 60.0px;">
+<col style=3D"width: 78.0px;">
+<col style=3D"width: 60.0px;">
+</colgroup>
+<tbody>
+<tr data-local-id=3D"18b0dfecd640">
+<th data-highlight-colour=3D"transparent" data-local-id=3D"68edf08d-3cc0-4e=
+b4-8dcb-3edaaa0f4253" class=3D"confluenceTh">
+<p local-id=3D"924cfbf98b02">&nbsp;</p></th>
+<th data-highlight-colour=3D"transparent" colspan=3D"2" data-local-id=3D"45=
+be2e9e-ac5f-4ecf-8433-8e4c1637211d" class=3D"confluenceTh">
+<p local-id=3D"622ae19b5f11" style=3D"text-align: center;"><strong>BRAND</s=
+trong>&nbsp;</p></th>
+<th data-highlight-colour=3D"transparent" colspan=3D"2" data-local-id=3D"d3=
+639a15-60bc-4820-b5da-dc2b1f2dc6bf" class=3D"confluenceTh">
+<p local-id=3D"9a66ae78e90a" style=3D"text-align: center;"><strong>DELIVERY=
+_TYPE</strong><br>
+(type d=E2=80=99envoi)&nbsp;</p></th>
+<th data-highlight-colour=3D"transparent" colspan=3D"2" data-local-id=3D"16=
+f17bf8-65b0-4df9-aaad-8ea24ac2eebb" class=3D"confluenceTh">
+<p local-id=3D"e656993ed72b" style=3D"text-align: center;"><strong>INITIATI=
+VE</strong><br>
+(campagne)&nbsp;</p></th>
+<th data-highlight-colour=3D"transparent" colspan=3D"2" data-local-id=3D"22=
+99cc52-dec2-44f9-87bf-e0584c85d387" class=3D"confluenceTh">
+<p local-id=3D"03830ce34dd6" style=3D"text-align: center;"><strong>&nbsp;&n=
+bsp;TOUCHPOINT </strong><br>
+(initiative)</p></th>
+<th data-highlight-colour=3D"transparent" colspan=3D"2" data-local-id=3D"58=
+16df76-601a-4835-8ffb-49b4a8a9291a" class=3D"confluenceTh">
+<p local-id=3D"184100826094" style=3D"text-align: center;"><strong>OBJECTIV=
+E</strong>&nbsp;</p></th>
+<th data-highlight-colour=3D"transparent" colspan=3D"2" data-local-id=3D"29=
+09df66-5496-46c7-a79a-d7e0dc5e1bc1" class=3D"confluenceTh">
+<p local-id=3D"34d56714967c" style=3D"text-align: center;"><strong>CHANNEL<=
+/strong>&nbsp;</p></th>
+<th data-highlight-colour=3D"transparent" colspan=3D"2" data-local-id=3D"76=
+658454-23fd-4d89-a803-2639535f439b" class=3D"confluenceTh">
+<p local-id=3D"c6e27299a1dd" style=3D"text-align: center;"><strong>REGION</=
+strong>&nbsp;</p></th>
+<th data-highlight-colour=3D"transparent" colspan=3D"2" data-local-id=3D"e3=
+2c595e-fade-43e1-a5b4-6e98470d8a30" class=3D"confluenceTh">
+<p local-id=3D"79dedb45c633" style=3D"text-align: center;"><strong>COUNTRY<=
+/strong>&nbsp;</p></th>
+<th data-highlight-colour=3D"transparent" colspan=3D"2" data-local-id=3D"c4=
+38fb1f-52e5-4a26-842e-2722273c09f6" class=3D"confluenceTh">
+<p local-id=3D"e896430b7560" style=3D"text-align: center;"><strong>LANGUE</=
+strong></p></th>
+<th data-highlight-colour=3D"transparent" colspan=3D"2" data-local-id=3D"fa=
+439fb5-25f4-4539-8f7d-7e7abbeb40f9" class=3D"confluenceTh">
+<p local-id=3D"7a13a15768b8" style=3D"text-align: center;"><strong>SEGMENT<=
+/strong>&nbsp;</p></th>
+<th data-highlight-colour=3D"transparent" colspan=3D"2" data-local-id=3D"37=
+97a73c-9225-4b93-ab2b-0fd0e5385408" class=3D"confluenceTh">
+<p local-id=3D"351c6b65851a" style=3D"text-align: center;"><strong>PLAN</st=
+rong><code>&nbsp;</code><br>
+(et Plan Combin=C3=A9)&nbsp;</p></th>
+<th data-highlight-colour=3D"transparent" colspan=3D"2" data-local-id=3D"4e=
+a0b4e4-a06c-4d9d-ac9c-6d4e81ba8700" class=3D"confluenceTh">
+<p local-id=3D"4d520f3dbcca" style=3D"text-align: center;"><strong>VERSION<=
+/strong>&nbsp;</p></th>
+<th data-highlight-colour=3D"transparent" colspan=3D"2" data-local-id=3D"e3=
+6b2b88-5cef-4706-bfb8-27a94be6cdd6" class=3D"confluenceTh">
+<p local-id=3D"a13c8954d27d" style=3D"text-align: center;"><strong>TEST</st=
+rong>&nbsp;</p></th>
+<th data-highlight-colour=3D"transparent" colspan=3D"2" data-local-id=3D"15=
+4e6eba-e79f-4b89-835f-d7b97533db2d" class=3D"confluenceTh">
+<p local-id=3D"f20e5609dac9" style=3D"text-align: center;"><strong>STEP </s=
+trong>(dans journeys)&nbsp;</p></th>
+</tr>
+<tr data-local-id=3D"313711902ac8">
+<th data-highlight-colour=3D"transparent" data-local-id=3D"ca616e79-7152-4f=
+f4-926d-b064398c4805" class=3D"confluenceTh">
+<p local-id=3D"05473a32ce3e">&nbsp;</p></th>
+<td data-highlight-colour=3D"#8dd873" data-local-id=3D"ddb20bbf-d245-4ae4-a=
+92d-74c67d65ac05" class=3D"confluenceTd">
+<p local-id=3D"cccd51fe16e7">&nbsp;</p></td>
+<td data-highlight-colour=3D"#83caeb" data-local-id=3D"8854af06-f38b-47eb-a=
+fa8-241b687a7fc4" class=3D"confluenceTd">
+<p local-id=3D"06aa285c6a4c">&nbsp;</p></td>
+<td data-highlight-colour=3D"#8dd873" data-local-id=3D"e2705134-94e2-48a9-9=
+302-27e4c696ce5b" class=3D"confluenceTd">
+<p local-id=3D"3cb8ef986124">&nbsp;</p></td>
+<td data-highlight-colour=3D"#83caeb" data-local-id=3D"2611177e-a751-4527-b=
+09b-1fb1e86e70a9" class=3D"confluenceTd">
+<p local-id=3D"15f51b0f9918">&nbsp;</p></td>
+<td data-highlight-colour=3D"#8dd873" data-local-id=3D"e8934aa5-13d1-49b3-a=
+eaa-ed9e1665fbec" class=3D"confluenceTd">
+<p local-id=3D"6b156ba89501">&nbsp;</p></td>
+<td data-highlight-colour=3D"#83caeb" data-local-id=3D"db0b23c4-0ad9-46a0-b=
+de5-f593b0c7d55b" class=3D"confluenceTd">
+<p local-id=3D"013dd0f54971">&nbsp;</p></td>
+<td data-highlight-colour=3D"#f1a983" data-local-id=3D"a266bd18-038c-468a-8=
+799-42d46093ea3a" class=3D"confluenceTd">
+<p local-id=3D"b84ffce46c35">&nbsp;</p></td>
+<td data-highlight-colour=3D"#e59edc" data-local-id=3D"278ea4d5-56a1-4801-a=
+496-bf92c25ecaf6" class=3D"confluenceTd">
+<p local-id=3D"d6cdd8d38794">&nbsp;</p></td>
+<td data-highlight-colour=3D"#8dd873" data-local-id=3D"da96acd8-d579-45d7-a=
+b16-69698636ad2c" class=3D"confluenceTd">
+<p local-id=3D"9dc7bbe35372">&nbsp;</p></td>
+<td data-highlight-colour=3D"#83caeb" data-local-id=3D"9b7c3747-e685-4334-9=
+789-10dd09cdfc0d" class=3D"confluenceTd">
+<p local-id=3D"ca74baa2bb31">&nbsp;</p></td>
+<td data-highlight-colour=3D"#f1a983" data-local-id=3D"dcf79718-a8c8-4c6e-9=
+a57-b9db221faa63" class=3D"confluenceTd">
+<p local-id=3D"8ab9e0265193">&nbsp;</p></td>
+<td data-highlight-colour=3D"#83caeb" data-local-id=3D"a203b5c3-3406-40d4-a=
+7c7-9cc1bfec0268" class=3D"confluenceTd">
+<p local-id=3D"1ff2cd5e5465">&nbsp;</p></td>
+<td data-highlight-colour=3D"#f1a983" data-local-id=3D"9c945d82-f38b-4fee-8=
+1c9-6c7b4c7c5623" class=3D"confluenceTd">
+<p local-id=3D"46af92113f15">&nbsp;</p></td>
+<td data-highlight-colour=3D"#83caeb" data-local-id=3D"b026ce8e-afcd-4a72-b=
+829-d7cce11ac841" class=3D"confluenceTd">
+<p local-id=3D"62e4f7019330">&nbsp;</p></td>
+<td data-highlight-colour=3D"#f1a983" data-local-id=3D"91fae5f9-0123-40f9-b=
+7c6-07ddb3c92a35" class=3D"confluenceTd">
+<p local-id=3D"136375a69475">&nbsp;</p></td>
+<td data-highlight-colour=3D"#83caeb" data-local-id=3D"dd6c2a54-39b0-46e0-a=
+55d-ef3042f8eb6f" class=3D"confluenceTd">
+<p local-id=3D"19fccfeeb013">&nbsp;</p></td>
+<td data-highlight-colour=3D"#f1a983" data-local-id=3D"c550b3c6-c437-468a-a=
+8a2-8a5d25f5cc13" class=3D"confluenceTd">
+<p local-id=3D"5331658c652b">&nbsp;</p></td>
+<td data-highlight-colour=3D"#83caeb" data-local-id=3D"f0f41430-5b15-46b3-b=
+8b1-65047ca04e27" class=3D"confluenceTd">
+<p local-id=3D"2c76fa0f4a2b">&nbsp;</p></td>
+<td data-highlight-colour=3D"#f1a983" data-local-id=3D"a0c62fd6-f702-4193-9=
+1bb-be572e0ff9c5" class=3D"confluenceTd">
+<p local-id=3D"591165fa9212">&nbsp;</p></td>
+<td data-highlight-colour=3D"#e59edc" data-local-id=3D"05dfbb9b-5c46-42fe-8=
+2d0-efcdd6c739cc" class=3D"confluenceTd">
+<p local-id=3D"6f8116a40eeb">&nbsp;</p></td>
+<td data-highlight-colour=3D"#f1a983" data-local-id=3D"b4df8ba4-60ee-45d0-8=
+48f-831dbc0125af" class=3D"confluenceTd">
+<p local-id=3D"cba212f92f51">&nbsp;</p></td>
+<td data-highlight-colour=3D"#e59edc" data-local-id=3D"a61ee7fa-e7a1-4bc7-a=
+371-5875464869c6" class=3D"confluenceTd">
+<p local-id=3D"1744cd8ded7f">&nbsp;</p></td>
+<td data-highlight-colour=3D"#f1a983" data-local-id=3D"c5707ab4-2d73-42f0-9=
+9dc-fd66c9279ea2" class=3D"confluenceTd">
+<p local-id=3D"eafb1175ec4f">&nbsp;</p></td>
+<td data-highlight-colour=3D"#e59edc" data-local-id=3D"ed1871d5-0bdd-4212-8=
+7ea-fc29904b2618" class=3D"confluenceTd">
+<p local-id=3D"8407ab04afdb">&nbsp;</p></td>
+<td data-highlight-colour=3D"#f1a983" data-local-id=3D"b60ef9d5-10cb-434d-8=
+0f0-95a26808132e" class=3D"confluenceTd">
+<p local-id=3D"55d636619311">&nbsp;</p></td>
+<td data-highlight-colour=3D"#e59edc" data-local-id=3D"8203b581-bac8-4f6f-a=
+520-50c86941936f" class=3D"confluenceTd">
+<p local-id=3D"eab7ccd1372d">&nbsp;</p></td>
+<td data-highlight-colour=3D"#f1a983" data-local-id=3D"841c8195-3323-43cd-9=
+93e-4d166a8ff90c" class=3D"confluenceTd">
+<p local-id=3D"767ce5293c7d">&nbsp;</p></td>
+<td data-highlight-colour=3D"#e59edc" data-local-id=3D"985dfdf5-96ac-4da1-8=
+c67-be9f3efd3582" class=3D"confluenceTd">
+<p local-id=3D"c98d5a8e4d78">&nbsp;</p></td>
+</tr>
+<tr data-local-id=3D"4a21661b7446">
+<th data-highlight-colour=3D"transparent" data-local-id=3D"e605bbfd-7cc3-4b=
+eb-ac22-5952ea01c743" class=3D"confluenceTh">
+<p local-id=3D"f396fa976e2c"><strong>LEXIQUE</strong><br>
+&nbsp;</p>
+<p local-id=3D"671d071601d1"><strong>CRM</strong>&nbsp;</p></th>
+<td data-highlight-colour=3D"transparent" colspan=3D"2" data-local-id=3D"fb=
+4a7f32-d5ce-4637-8388-9de42bdefe2b" class=3D"confluenceTd">
+<p local-id=3D"b511cfdfb33e">SP=E2=80=AF: Spypoint&nbsp;</p>
+<p local-id=3D"2c4bfa0ce5dc">VK=E2=80=AF: Vosker&nbsp;</p>
+<p local-id=3D"052406e08f75">&nbsp;</p></td>
+<td data-highlight-colour=3D"transparent" colspan=3D"2" data-local-id=3D"6b=
+69dc41-7cc2-4e90-b0f4-1aed2e09d83a" class=3D"confluenceTd">
+<p local-id=3D"99e79fe239d3">AUT =E2=80=93 Journey<br>
+TRX =E2=80=93 Transactional&nbsp;</p>
+<p local-id=3D"9d1cd37c35fe">&nbsp;</p></td>
+<td data-highlight-colour=3D"transparent" colspan=3D"2" data-local-id=3D"95=
+3c1ea0-241c-4525-a88b-170ad244507f" class=3D"confluenceTd">
+<p local-id=3D"6ce146d37d0c">CACT =3D Camera Activation<br>
+IC =3D Insiders Club&nbsp;</p>
+<p local-id=3D"04a0a3a9ec0b">SUBR =3D Subscription<br>
+MCL =3D Multi-cam license&nbsp;</p>
+<p local-id=3D"4979a18255da">&nbsp;</p></td>
+<td data-highlight-colour=3D"transparent" colspan=3D"2" data-local-id=3D"d0=
+35548f-bba1-4d67-b631-ebb6ea58c791" class=3D"confluenceTd">
+<p local-id=3D"d1520edc04ff">100&nbsp;</p>
+<p local-id=3D"974cc22204b9">200&nbsp;</p>
+<p local-id=3D"a6bc10d1f488">300&nbsp;</p>
+<p local-id=3D"5863b0e29ba0"><br>
+Si ajout:<br>
+101&nbsp;</p>
+<p local-id=3D"034e778567c0">102&nbsp;</p>
+<p local-id=3D"cbf500525e01">...&nbsp;</p>
+<p local-id=3D"a7d54dbfeaae">201<br>
+202<br>
+&nbsp;</p></td>
+<td data-highlight-colour=3D"transparent" colspan=3D"2" data-local-id=3D"cc=
+e2c258-8f2c-467e-b70a-7ed77824a92e" class=3D"confluenceTd">
+<p local-id=3D"2bf4e737817a">ACQ =3D Acquisition&nbsp;<br>
+ONB =3D Onboarding&nbsp;<br>
+UPG =3D Upsell<br>
+PRM =3D Promo&nbsp;<br>
+XSL =3D Cross-sell&nbsp;<br>
+REN =3D Renewal&nbsp;<br>
+WIN =3D Winback&nbsp;<br>
+EDU =3D Education&nbsp;<br>
+ANN =3D Announcement&nbsp;<br>
+CRT =3D Cart Abandon&nbsp;<br>
+BRW =3D Browse Abandon&nbsp;<br>
+SUR =3D Survey&nbsp;<br>
+NPS =3D NPS&nbsp;<br>
+SUP =3D Support&nbsp;</p></td>
+<td data-highlight-colour=3D"transparent" colspan=3D"2" data-local-id=3D"90=
+6fa13d-027c-4a49-915a-a46a553ab9f0" class=3D"confluenceTd">
+<p local-id=3D"1b588dd4d831">EM =3D Email&nbsp;</p>
+<p local-id=3D"79726cbf1d9b">SMS =3D SMS&nbsp;</p>
+<p local-id=3D"cb9e4387650d">PS =3D Push&nbsp;</p>
+<p local-id=3D"2888abdd6a13">IA =3D In-App&nbsp;</p>
+<p local-id=3D"5e05b36ce32b">IB =3D Inbox&nbsp;</p>
+<p local-id=3D"ddf86bcac1f1">LP =3D Landing Page&nbsp;</p>
+<p local-id=3D"198f6fb37a37">AD =3D Ad Audience&nbsp;</p></td>
+<td data-highlight-colour=3D"transparent" colspan=3D"2" data-local-id=3D"f5=
+a9289a-6492-4457-88b2-f63a656123e5" class=3D"confluenceTd">
+<p local-id=3D"0645c6e907a9">NA<br>
+EMEA<br>
+&nbsp;</p>
+<p local-id=3D"c878f4f5a8bf">LATAM&nbsp;</p>
+<p local-id=3D"8d9bda2ea557">APAC&nbsp;</p>
+<p local-id=3D"6465ee99a6c6">&nbsp;</p>
+<p local-id=3D"3e1cf289f32e">&nbsp;</p></td>
+<td data-highlight-colour=3D"transparent" colspan=3D"2" data-local-id=3D"bd=
+666f93-7bec-4faa-addc-a3ebb5b7c66e" class=3D"confluenceTd">
+<p local-id=3D"d0d710103255">CA<br>
+US<br>
+UK<br>
+FR<br>
+DE<br>
+SP<br>
+IT<br>
+&nbsp;</p></td>
+<td data-highlight-colour=3D"transparent" colspan=3D"2" data-local-id=3D"69=
+2e8662-6e30-41dc-8636-0a19400ea367" class=3D"confluenceTd">
+<p local-id=3D"a8456fa446c2">FR&nbsp;<br>
+EN&nbsp;<br>
+ES<br>
+DE<br>
+IT&nbsp;</p></td>
+<td data-highlight-colour=3D"transparent" colspan=3D"2" data-local-id=3D"39=
+6dc25f-da19-4c03-af30-eea44b69aea6" class=3D"confluenceTd">
+<p local-id=3D"0e19b8ffa83d">B2C<br>
+B2B&nbsp;<br>
+Non_Ic&nbsp;<br>
+IC<br>
+ProStaff&nbsp;<br>
+List<br>
+Leads</p></td>
+<td data-highlight-colour=3D"transparent" colspan=3D"2" data-local-id=3D"e0=
+938790-cb46-460d-9ae1-a8acacc13b22" class=3D"confluenceTd">
+<p local-id=3D"00709191a661">MON =3D Monthly&nbsp;</p></td>
+<td data-highlight-colour=3D"transparent" colspan=3D"2" data-local-id=3D"97=
+155d4b-ebde-49f1-bea0-a59dc04f3f97" class=3D"confluenceTd">
+<p local-id=3D"e02befed563f">V1&nbsp;<br>
+V2&nbsp;<br>
+V3&nbsp;</p></td>
+<td data-highlight-colour=3D"transparent" colspan=3D"2" data-local-id=3D"9f=
+2cc975-b4dd-49ac-b705-6b656fc1d1e5" class=3D"confluenceTd">
+<p local-id=3D"a5bf44665aa1">A<br>
+B&nbsp;<br>
+C</p></td>
+<td data-highlight-colour=3D"transparent" colspan=3D"2" data-local-id=3D"1f=
+9f16af-878d-4168-bb04-29a9462a2dd7" class=3D"confluenceTd">
+<p local-id=3D"6d9f4149888e">S01 <br>
+S02<br>
+S03<br>
+S04</p></td>
+</tr>
+<tr data-local-id=3D"af3e59770f56">
+<th data-highlight-colour=3D"transparent" data-local-id=3D"f3981967-fbea-44=
+4d-a897-0d4172b251b6" class=3D"confluenceTh">
+<p local-id=3D"e4dcb18ab1d3" style=3D"text-align: center;">&nbsp;</p></th>
+<td data-highlight-colour=3D"transparent" colspan=3D"2" data-local-id=3D"ec=
+00c7b2-ae84-4aee-8031-9b9f32703f8f" class=3D"confluenceTd">
+<p local-id=3D"9bb8cd12d55f" style=3D"text-align: center;"><strong>BRAND</s=
+trong>&nbsp;</p></td>
+<td data-highlight-colour=3D"transparent" colspan=3D"2" data-local-id=3D"f3=
+f6df41-1b27-4964-b9fc-cb1522313257" class=3D"confluenceTd">
+<p local-id=3D"3a9d5eb360a5" style=3D"text-align: center;"><strong>DELIVERY=
+_TYPE</strong><br>
+(type d=E2=80=99envoi)&nbsp;</p></td>
+<td data-highlight-colour=3D"transparent" colspan=3D"2" data-local-id=3D"5c=
+a3f950-ec6d-419d-832e-0ba939146cbe" class=3D"confluenceTd">
+<p local-id=3D"4a3231fd15a5"><strong>CAMPAGIN_PERIOD</strong></p></td>
+<td data-highlight-colour=3D"transparent" colspan=3D"2" data-local-id=3D"ff=
+09cccb-9f0e-4534-b8cd-9dba6fd44d0c" class=3D"confluenceTd">
+<p local-id=3D"ececd19d40ab" style=3D"text-align: center;"><strong>CAMPAIGN=
+_TYPE</strong>&nbsp;</p></td>
+<td data-highlight-colour=3D"transparent" colspan=3D"2" data-local-id=3D"04=
+380bd4-ede3-4d46-884e-4687e19d1d25" class=3D"confluenceTd">
+<p local-id=3D"10006daca941" style=3D"text-align: center;"><strong>CAMPAIGN=
+_NAME</strong>&nbsp;</p></td>
+<td data-highlight-colour=3D"transparent" colspan=3D"2" data-local-id=3D"2b=
+afdd74-52ba-48ca-9afe-4b71f060567e" class=3D"confluenceTd">
+<p local-id=3D"73706e08c003" style=3D"text-align: center;"><strong>OBJECTIV=
+E</strong>&nbsp;</p></td>
+<td data-highlight-colour=3D"transparent" colspan=3D"2" data-local-id=3D"f5=
+f16720-87e9-40d0-ba77-44602e9acb63" class=3D"confluenceTd">
+<p local-id=3D"b81bde387bb5" style=3D"text-align: center;"><strong>CHANNEL<=
+/strong>&nbsp;</p></td>
+<td data-highlight-colour=3D"transparent" colspan=3D"2" data-local-id=3D"8a=
+eda481-e1e1-4f2b-af62-025921488871" class=3D"confluenceTd">
+<p local-id=3D"2b213d5a0363" style=3D"text-align: center;"><strong>REGION</=
+strong>&nbsp;</p></td>
+<td data-highlight-colour=3D"transparent" colspan=3D"2" data-local-id=3D"66=
+fd7500-74a8-4d93-8d8b-96a50ebdd46a" class=3D"confluenceTd">
+<p local-id=3D"b0fad5497346" style=3D"text-align: center;"><strong>COUNTRY<=
+/strong>&nbsp;</p></td>
+<td data-highlight-colour=3D"transparent" colspan=3D"2" data-local-id=3D"82=
+32254e-9108-4a2e-90d7-636d7a6927ff" class=3D"confluenceTd">
+<p local-id=3D"f8dac0ee7bc0" style=3D"text-align: center;"><strong>LANGUE</=
+strong>&nbsp;</p></td>
+<td data-highlight-colour=3D"transparent" colspan=3D"2" data-local-id=3D"99=
+70db19-49f0-42de-acca-402f9bdb7028" class=3D"confluenceTd">
+<p local-id=3D"a4a4a969209d" style=3D"text-align: center;"><strong>SEGMENT<=
+/strong>&nbsp;</p></td>
+<td data-highlight-colour=3D"transparent" colspan=3D"2" data-local-id=3D"e4=
+b7c691-d16a-4a57-9cc8-787fd06cb5e1" class=3D"confluenceTd">
+<p local-id=3D"81a337846f79" style=3D"text-align: center;"><strong>PRODUCT<=
+/strong>&nbsp;</p></td>
+<td data-highlight-colour=3D"transparent" colspan=3D"2" data-local-id=3D"5b=
+49f11a-b8dd-49a2-9617-b2268c541cac" class=3D"confluenceTd">
+<p local-id=3D"f063b71634aa" style=3D"text-align: center;"><strong>VERSION<=
+/strong></p></td>
+<td data-highlight-colour=3D"transparent" colspan=3D"2" data-local-id=3D"af=
+275f56-c4e4-4d74-81f2-0ea931075f29" class=3D"confluenceTd">
+<p></p></td>
+</tr>
+<tr data-local-id=3D"aef7bb4dfef2">
+<th data-highlight-colour=3D"transparent" data-local-id=3D"588b8a01-aa1d-4c=
+26-a83b-0bf4565267b4" class=3D"confluenceTh">
+<p local-id=3D"bcc411dc5ca4">&nbsp;</p></th>
+<td data-highlight-colour=3D"transparent" data-local-id=3D"caee718c-ab72-41=
+44-bc39-53162b3d0383" class=3D"confluenceTd">
+<p local-id=3D"7ea1317d8514">&nbsp;</p></td>
+<td data-highlight-colour=3D"transparent" data-local-id=3D"6ed88202-2d73-4d=
+16-911b-e5052c378a6b" class=3D"confluenceTd">
+<p local-id=3D"deeedff6df5f">&nbsp;</p></td>
+<td data-highlight-colour=3D"transparent" data-local-id=3D"a89e56a3-6cdb-45=
+15-9d8b-cd2a4d8270c9" class=3D"confluenceTd">
+<p local-id=3D"7b5c50852d08">&nbsp;</p></td>
+<td data-highlight-colour=3D"transparent" data-local-id=3D"12b2502d-fc44-45=
+dc-8f7a-a3ad19cbb554" class=3D"confluenceTd">
+<p local-id=3D"fbd5f5b0518e">&nbsp;</p></td>
+<td data-highlight-colour=3D"transparent" data-local-id=3D"71b5749f-2550-49=
+88-8dc2-d4f1ddaaf94c" class=3D"confluenceTd">
+<p></p></td>
+<td data-highlight-colour=3D"transparent" data-local-id=3D"333febc9-8577-4c=
+13-acf8-ddd10467e1d3" class=3D"confluenceTd">
+<p></p></td>
+<td data-highlight-colour=3D"transparent" data-local-id=3D"6852645f-5613-4c=
+6e-971d-a11d422561ab" class=3D"confluenceTd">
+<p local-id=3D"ff0f6c287bcb">&nbsp;</p></td>
+<td data-highlight-colour=3D"transparent" data-local-id=3D"6b57864b-66c3-4e=
+69-85c9-2221a57ebd9b" class=3D"confluenceTd">
+<p local-id=3D"6295f91cbc0c">&nbsp;</p></td>
+<td data-highlight-colour=3D"transparent" data-local-id=3D"3b4ddcd1-82fe-47=
+f3-8426-af731046b6bf" class=3D"confluenceTd">
+<p local-id=3D"8f92bdce8890">&nbsp;</p></td>
+<td data-highlight-colour=3D"transparent" data-local-id=3D"251daf80-020b-41=
+fa-ae58-3f2b9f622211" class=3D"confluenceTd">
+<p local-id=3D"ceba56a5a562">&nbsp;</p></td>
+<td data-highlight-colour=3D"transparent" data-local-id=3D"ec85394e-8448-43=
+eb-8ffa-8072fe427631" class=3D"confluenceTd">
+<p local-id=3D"578f70ca29b0">&nbsp;</p></td>
+<td data-highlight-colour=3D"transparent" data-local-id=3D"8605017f-e469-4e=
+a9-9be6-ae4cbc765c02" class=3D"confluenceTd">
+<p local-id=3D"ea4fd0c60c81">&nbsp;</p></td>
+<td data-highlight-colour=3D"transparent" data-local-id=3D"a2692f88-43e2-4e=
+4e-aae0-4d07a37c484f" class=3D"confluenceTd">
+<p local-id=3D"8b430c520e2e">&nbsp;</p></td>
+<td data-highlight-colour=3D"transparent" data-local-id=3D"a747ae0e-1e18-49=
+de-a031-1597f292beac" class=3D"confluenceTd">
+<p local-id=3D"eacf42190c29">&nbsp;</p></td>
+<td data-highlight-colour=3D"transparent" data-local-id=3D"88421619-355b-44=
+63-a9c9-27db24975077" class=3D"confluenceTd">
+<p local-id=3D"1a39356aa3d8">&nbsp;</p></td>
+<td data-highlight-colour=3D"transparent" data-local-id=3D"a803808a-3857-40=
+47-b95f-0515588991be" class=3D"confluenceTd">
+<p local-id=3D"3f6e937d6c85">&nbsp;</p></td>
+<td data-highlight-colour=3D"transparent" data-local-id=3D"d59f9d3f-e171-4a=
+33-9926-900da14d57bb" class=3D"confluenceTd">
+<p local-id=3D"d4ff21e15621">&nbsp;</p></td>
+<td data-highlight-colour=3D"transparent" data-local-id=3D"479e5afc-a2b9-4f=
+98-83f6-d9150436f68a" class=3D"confluenceTd">
+<p local-id=3D"a3b1b96733f4">&nbsp;</p></td>
+<td data-highlight-colour=3D"transparent" data-local-id=3D"7129d185-ca34-45=
+b1-b93d-0376c07bef36" class=3D"confluenceTd">
+<p local-id=3D"bb256453c574">&nbsp;</p></td>
+<td data-highlight-colour=3D"transparent" data-local-id=3D"4fa2b513-0cb8-47=
+3d-85d2-d7d552bdaac1" class=3D"confluenceTd">
+<p local-id=3D"6e206e115e4e">&nbsp;</p></td>
+<td data-highlight-colour=3D"transparent" data-local-id=3D"890e93a9-3a09-46=
+5b-bc6d-ec17da6a8cec" class=3D"confluenceTd">
+<p local-id=3D"ccc0777eb68f">&nbsp;</p></td>
+<td data-highlight-colour=3D"transparent" data-local-id=3D"aa09a9ff-eb6c-46=
+f7-86f6-65fc40d3664f" class=3D"confluenceTd">
+<p local-id=3D"51450ec4e46e">&nbsp;</p></td>
+<td data-highlight-colour=3D"transparent" data-local-id=3D"5dd65746-cd2a-45=
+58-bd93-91db3bb2d990" class=3D"confluenceTd">
+<p local-id=3D"27fae2366083">&nbsp;</p></td>
+<td data-highlight-colour=3D"transparent" data-local-id=3D"b37c00a4-e76b-47=
+15-8d57-a434350e59c5" class=3D"confluenceTd">
+<p local-id=3D"9e9cb081c3c4">&nbsp;</p></td>
+<td data-highlight-colour=3D"transparent" data-local-id=3D"9297c43d-1df6-44=
+0e-931d-e38ca3547469" class=3D"confluenceTd">
+<p local-id=3D"f84d0b11de1f">&nbsp;</p></td>
+<td data-highlight-colour=3D"transparent" data-local-id=3D"8792bff9-f2bd-4e=
+e3-84b4-6d5cb53ef23f" class=3D"confluenceTd">
+<p local-id=3D"753efd94b947">&nbsp;</p></td>
+<td data-highlight-colour=3D"transparent" colspan=3D"2" data-local-id=3D"40=
+aa7d71-fb5c-4e47-8d18-cea3ed1f5de1" class=3D"confluenceTd">
+<p></p></td>
+</tr>
+<tr data-local-id=3D"7311a629c3b1">
+<th data-highlight-colour=3D"transparent" data-local-id=3D"c2ca82f9-edfb-46=
+8c-b422-0338833f67a7" class=3D"confluenceTh">
+<p local-id=3D"fa29cdff5d18"><strong>LEXIQUE</strong><br><strong>&nbsp;</st=
+rong>&nbsp;</p>
+<p local-id=3D"0fbbc0179144"><strong>One-Shot</strong>&nbsp;</p></th>
+<td data-highlight-colour=3D"transparent" colspan=3D"2" data-local-id=3D"c9=
+d3bdd9-1d25-45ed-8031-cb191afffc8e" class=3D"confluenceTd">
+<p local-id=3D"23508bfa7a1c">SP=E2=80=AF: Spypoint&nbsp;</p>
+<p local-id=3D"390ea4dc1b75">VK=E2=80=AF: Vosker&nbsp;</p>
+<p local-id=3D"5d5a0abe5509">&nbsp;</p>
+<p local-id=3D"41b77016796b">&nbsp;</p></td>
+<td data-highlight-colour=3D"transparent" colspan=3D"2" data-local-id=3D"af=
+71b97f-87ec-47c1-9660-0860b2985759" class=3D"confluenceTd">
+<p local-id=3D"1f372f3b7184">OS&nbsp;&nbsp; =3D One-shot Campaign<br>
+ADH =E2=80=93 Ad Hoc&nbsp;</p></td>
+<td data-highlight-colour=3D"transparent" colspan=3D"2" data-local-id=3D"5d=
+9121cf-e0fa-401a-8856-6f9f50d1cade" class=3D"confluenceTd">
+<p local-id=3D"cde6e05d0f65">YYYY-MM</p></td>
+<td data-highlight-colour=3D"transparent" colspan=3D"2" data-local-id=3D"c8=
+de6aac-0531-4f0a-a4eb-f4358bf1bc82" class=3D"confluenceTd">
+<p local-id=3D"af5318bf250a">PROMO&nbsp;<br>
+NEWSLETTER&nbsp;<br>
+LAUNCH&nbsp;<br>
+SEASONAL&nbsp;<br>
+EVENT<br>
+SERVICE&nbsp;<br>
+CONTEST&nbsp;</p>
+<p local-id=3D"a06a2fb5e2ef">&nbsp;</p></td>
+<td data-highlight-colour=3D"transparent" colspan=3D"2" data-local-id=3D"59=
+746037-5f51-4cd5-94fd-78b2fea617af" class=3D"confluenceTd">
+<p local-id=3D"f4fc0de807fd">BF&nbsp;<br>
+XMAS&nbsp;<br>
+SPRING&nbsp;<br>
+FLASH&nbsp;<br>
+VIPSALE&nbsp;<br>
+NEWARRIVAL&nbsp;</p></td>
+<td data-highlight-colour=3D"transparent" colspan=3D"2" data-local-id=3D"09=
+8ba004-3c66-4734-905d-3b6f2667ca7f" class=3D"confluenceTd">
+<p local-id=3D"e0a7fbba5182">ACQ =3D Acquisition&nbsp;<br>
+ONB =3D Onboarding&nbsp;<br>
+UPG =3D Upsell<br>
+PRM =3D Promo&nbsp;<br>
+XSL =3D Cross-sell&nbsp;<br>
+REN =3D Renewal&nbsp;<br>
+WIN =3D Winback&nbsp;<br>
+EDU =3D Education&nbsp;<br>
+ANN =3D Announcement&nbsp;<br>
+CRT =3D Cart Abandon&nbsp;<br>
+BRW =3D Browse Abandon&nbsp;<br>
+SUR =3D Survey&nbsp;<br>
+NPS =3D NPS&nbsp;<br>
+SUP =3D Support&nbsp;</p></td>
+<td data-highlight-colour=3D"transparent" colspan=3D"2" data-local-id=3D"03=
+9def0f-fbbf-4ad7-a39a-3c612879513e" class=3D"confluenceTd">
+<p local-id=3D"f410246733bb">EM =3D Email&nbsp;<br>
+SMS =3D SMS&nbsp;<br>
+PS =3D Push&nbsp;<br>
+IA =3D In-App&nbsp;<br>
+IB =3D Inbox&nbsp;<br>
+LP =3D Landing Page&nbsp;<br>
+AD =3D Ad Audience&nbsp;</p>
+<p local-id=3D"4b509160a656">&nbsp;</p></td>
+<td data-highlight-colour=3D"transparent" colspan=3D"2" data-local-id=3D"b1=
+f9f7ea-cc80-4c90-896f-22f1872432fb" class=3D"confluenceTd">
+<p local-id=3D"3bc37ab382d6">NA<br>
+EMEA<br>
+LATAM&nbsp;<br>
+APAC&nbsp;</p>
+<p local-id=3D"4f1a5b6c78bb">&nbsp;</p></td>
+<td data-highlight-colour=3D"transparent" colspan=3D"2" data-local-id=3D"9b=
+e7a36a-2bcc-41a5-bf35-1ef97edcb744" class=3D"confluenceTd">
+<p local-id=3D"0156c2715b68">CA<br>
+US<br>
+UK<br>
+FR<br>
+DE<br>
+SP<br>
+IT<br>
+&nbsp;</p></td>
+<td data-highlight-colour=3D"transparent" colspan=3D"2" data-local-id=3D"98=
+96c492-2966-4d2d-82a4-b7761190dc5e" class=3D"confluenceTd">
+<p local-id=3D"44cc177b5ce8">FR&nbsp;<br>
+EN&nbsp;<br>
+ES<br>
+DE<br>
+IT&nbsp;</p>
+<p local-id=3D"fb458549d04d">&nbsp;</p></td>
+<td data-highlight-colour=3D"transparent" colspan=3D"2" data-local-id=3D"f4=
+f444c9-0ae9-4377-91ce-fb67eb65865c" class=3D"confluenceTd">
+<p local-id=3D"452ae91789ff">B2C<br>
+B2B&nbsp;<br>
+Non_Ic&nbsp;<br>
+IC<br>
+ProStaff&nbsp;<br>
+List<br>
+Leads</p>
+<p local-id=3D"c2caa588321a">&nbsp;</p></td>
+<td data-highlight-colour=3D"transparent" colspan=3D"2" data-local-id=3D"02=
+19742a-c801-4cec-9ca4-55332113484e" class=3D"confluenceTd">
+<p local-id=3D"af889b255c15">Camera&nbsp;<br>
+Plan<br>
+Accessory<br>
+Blog&nbsp;</p>
+<p local-id=3D"e39adcb6c5bf">&nbsp;</p></td>
+<td data-highlight-colour=3D"transparent" colspan=3D"2" data-local-id=3D"43=
+9c3fbf-50ac-4413-b919-ebfc91a10507" class=3D"confluenceTd">
+<p local-id=3D"09a844583f5e">&nbsp;V1&nbsp;<br>
+V2&nbsp;<br>
+V3&nbsp;</p></td>
+<td data-highlight-colour=3D"transparent" colspan=3D"2" data-local-id=3D"83=
+5fa19e-c0cc-4f71-ac5d-6b0b6272bdc1" class=3D"confluenceTd">
+<p></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p local-id=3D"528f466dc774">&nbsp;</p>
+<p local-id=3D"c92d0e9df6b2">FORMAT pour CRM : <br>
+BRAND_DELIVERY_TYPE_INITIATIVE_TOUCHPOINT_OBJECTIVE_CHANNEL_REGION_COUNTRY_=
+LANGUE_SEGMENT_PLAN_VERSION_TEST_STEP</p>
+<p local-id=3D"b1214ccabd6b">FORMAT pour OneShot : <br>
+BRAND_DELIVERY_CAMPAIGNTYPE_CAMPAIGNNAME_OBJECTIVE_CHANNEL_REGION_COUNTRY_L=
+ANGUE_SEGMENT_PRODUCT_VERSION_TEST_STEP<br></p>
+<p local-id=3D"d83346fd10c3">=F0=9F=A7=A9 1. Comprendre les deux lexiques&n=
+bsp;</p>
+<p local-id=3D"76f78ec04edc">=E2=9E=A4 Lexique CRM (automated / journeys)&n=
+bsp;</p>
+<p local-id=3D"dd21fd151787">Objectif : structurer les <strong>flows</stron=
+g> &amp; <strong>steps</strong><code>&nbsp;</code><br>
+Dimensions macro =E2=86=92 micro, incluant INITIATIVE, TOUCHPOINT, STEP.&nb=
+sp;</p>
+<p local-id=3D"e9b3f05f670f"><strong>=E2=9A=99=EF=B8=8F Dimensions CRM</str=
+ong>&nbsp;</p>
+<ul local-id=3D"a9a727ae-a88a-4389-854b-7962e3cb7039">
+<li local-id=3D"c05d5939-956d-4ab8-b8bf-72d5c8f0ea40">
+<p local-id=3D"879f8a6973bd">BRAND&nbsp;</p></li>
+</ul>
+<ul local-id=3D"79287da3-cba5-4e00-928d-4360c9af1ce8">
+<li local-id=3D"2dd70d59-710b-473b-8f9e-b6f5fa6779cf">
+<p local-id=3D"ca2a83232d67">DELIVERY_TYPE&nbsp;</p></li>
+</ul>
+<ul local-id=3D"552f0d62-ca83-474d-9be1-477ca129f9dd">
+<li local-id=3D"c8e96b32-f4f1-414c-a13b-6fff5f19fe7d">
+<p local-id=3D"3cd29a9bfdf2">INITIATIVE&nbsp;</p></li>
+</ul>
+<ul local-id=3D"b04cfc8a-44e6-4182-be3f-537a29cce6cc">
+<li local-id=3D"8e1c99e8-02bb-4834-a934-a0d3fa8b1630">
+<p local-id=3D"21647394ceeb">TOUCHPOINT&nbsp;</p></li>
+</ul>
+<ul local-id=3D"b2e84ffc-7714-48d5-a4e1-a5adb3228d46">
+<li local-id=3D"d8f87fdd-8417-47aa-8feb-81372df87836">
+<p local-id=3D"4245fa678fe7">OBJECTIVE&nbsp;</p></li>
+</ul>
+<ul local-id=3D"d8d7d5bf-f4ca-46af-8b5e-050791c36b7a">
+<li local-id=3D"ec7965ef-f475-4d5a-864e-d19de20d2d91">
+<p local-id=3D"f79f89d71992">CHANNEL&nbsp;</p></li>
+</ul>
+<ul local-id=3D"3a834d13-6552-4665-845e-d4047e877fd1">
+<li local-id=3D"dc9a3d1a-6c83-4e95-b936-0fc81f84a85b">
+<p local-id=3D"6e386b2984ef">REGION&nbsp;</p></li>
+</ul>
+<ul local-id=3D"740dc1cd-4400-4bb1-8b0b-e38df7a7095e">
+<li local-id=3D"b9020bfe-9cb7-49c2-a4ed-37b969a400dd">
+<p local-id=3D"3fb1409582e4">COUNTRY&nbsp;</p></li>
+</ul>
+<ul local-id=3D"42326bd6-e2c6-4a3a-aa3b-f703eb24dc57">
+<li local-id=3D"ce986d1b-4fb8-4aa8-b3f6-8d63f13bbd11">
+<p local-id=3D"bfece0db1e69">LANGUE&nbsp;</p></li>
+</ul>
+<ul local-id=3D"79c99aaa-d4e9-4913-aee6-2d7e55797039">
+<li local-id=3D"6bb659aa-c172-430f-ab63-b89b8da7c87f">
+<p local-id=3D"ce3c0de687cf">AUDIENCE_SEGMENT&nbsp;</p></li>
+</ul>
+<ul local-id=3D"c2d98e1b-6353-424a-b428-f785f5398a11">
+<li local-id=3D"8869f5d8-22e3-4c4a-9065-1d6fef63fa78">
+<p local-id=3D"0decd8c291b3">PLAN&nbsp;</p></li>
+</ul>
+<ul local-id=3D"6cdead5f-8029-4983-97ca-9406bed1ace3">
+<li local-id=3D"28d0289d-f2ed-4ba8-a370-1bc77209d6ff">
+<p local-id=3D"84264b68df3d">VERSION&nbsp;</p></li>
+</ul>
+<ul local-id=3D"de73ad19-298c-4fad-a555-9c495a0b12a3">
+<li local-id=3D"b031d81e-eff2-4a3d-838e-311c5c01a6c7">
+<p local-id=3D"151aba8dda31">TEST&nbsp;</p></li>
+</ul>
+<ul local-id=3D"4cc92af7-0ee2-4816-9a67-2f74a37afe29">
+<li local-id=3D"7cfeae28-fccd-40e3-b3bc-2103573f5edc">
+<p local-id=3D"7824ee127bfa">STEP&nbsp;</p></li>
+</ul>
+<p local-id=3D"2226f2475ea0">&nbsp;</p>
+<p local-id=3D"012931376815">&nbsp;</p>
+<p local-id=3D"9a31106bdd75">&nbsp;</p>
+<p local-id=3D"edcda9c66243">&nbsp;</p>
+<p local-id=3D"14863a6f5e05">&nbsp;</p>
+<p local-id=3D"d5672e7afc05">=E2=9E=A4 Lexique OneShot&nbsp;</p>
+<p local-id=3D"7772797b1d73">Objectif : structurer les communications <stro=
+ng>ponctuelles / calendaires / ad hoc</strong>&nbsp;</p>
+<p local-id=3D"56ee5fe83469"><strong>=E2=9A=99=EF=B8=8F Dimensions OneShot<=
+/strong>&nbsp;</p>
+<ul local-id=3D"de3a9188-2959-43d5-8df6-34c2b72aafae">
+<li local-id=3D"09a24b30-e05e-4425-b1d1-4991d52566a6">
+<p local-id=3D"b36a4efa0368">BRAND&nbsp;</p></li>
+</ul>
+<ul local-id=3D"187689d7-1cf3-4057-a5ad-107f9adb0103">
+<li local-id=3D"01af22c4-fcab-4785-8fec-8f0b720bafac">
+<p local-id=3D"4796fc95b626">DELIVERY_TYPE&nbsp;</p></li>
+</ul>
+<ul local-id=3D"cf9188d7-da84-4bba-b9d6-eb57b1ff9aeb">
+<li local-id=3D"7443faef-0e24-4f1b-8541-29d51fcfe52a">
+<p local-id=3D"0ef7a3ff5480">CAMPAIGN_TYPE&nbsp;</p></li>
+</ul>
+<ul local-id=3D"6d2404ec-86aa-4f1b-8b5c-57ea00f076e2">
+<li local-id=3D"22809728-6338-4fb4-b169-2f81586ef5cf">
+<p local-id=3D"87ddf1e51bda">CAMPAIGN_NAME&nbsp;</p></li>
+</ul>
+<ul local-id=3D"3af3f831-a603-4fd5-8389-7d6290a8434a">
+<li local-id=3D"30f83360-b3b9-4bfc-b773-de6d31250989">
+<p local-id=3D"9e8f1e408422">OBJECTIVE&nbsp;</p></li>
+</ul>
+<ul local-id=3D"7f026125-6faf-4c2c-935a-391bf76254cb">
+<li local-id=3D"67b6cd86-7906-40cb-b72c-7562fac0c2a4">
+<p local-id=3D"1c58e870118c">CHANNEL&nbsp;</p></li>
+</ul>
+<ul local-id=3D"1ab3dc19-98de-45da-a34d-2ff6c5a051f6">
+<li local-id=3D"fb4e0298-7d27-42e1-84ab-29416fc474c5">
+<p local-id=3D"dde92b0dc8d4">REGION&nbsp;</p></li>
+</ul>
+<ul local-id=3D"da308af4-2dc7-4e08-8f8f-a7cac34b3ff6">
+<li local-id=3D"346c175b-bcad-48c4-ab08-de1d65798ba4">
+<p local-id=3D"6ece30fa0ef9">COUNTRY&nbsp;</p></li>
+</ul>
+<ul local-id=3D"403ee23d-d940-4d1b-a4f6-31949ddf2679">
+<li local-id=3D"3b26795e-af1f-4f65-a0c9-cb3de22bda39">
+<p local-id=3D"1b39b4a8e680">LANGUE&nbsp;</p></li>
+</ul>
+<ul local-id=3D"4b43cbce-8726-403e-b5d7-4354194eab00">
+<li local-id=3D"1e03b70d-8e36-4813-9ebf-c8a04016376e">
+<p local-id=3D"bb3ff3d98eef">AUDIENCE_SEGMENT&nbsp;</p></li>
+</ul>
+<ul local-id=3D"47598e7e-1f70-46ab-a216-fe60231c2203">
+<li local-id=3D"9417a229-c54f-4ba7-87ff-33ef790c34f9">
+<p local-id=3D"037815530ff9">PRODUCT&nbsp;</p></li>
+</ul>
+<ul local-id=3D"b52c30ff-e3ed-4aec-ba56-4b8702bc762b">
+<li local-id=3D"18bcf989-360a-4419-9398-1bdfdacbe778">
+<p local-id=3D"a61423aaa1ab">VERSION&nbsp;</p></li>
+</ul>
+<ul local-id=3D"97e19a81-5129-434b-a3c0-a41e84e6a6a8">
+<li local-id=3D"a5a1cecd-b06d-4dbf-ac98-1be03b2898eb">
+<p local-id=3D"9b58ac1064a7">TEST&nbsp;</p></li>
+</ul>
+<ul local-id=3D"8c47264a-9962-4138-afa4-cc4bf4de0306">
+<li local-id=3D"5ff5acf8-1257-421f-98b9-f5d5577e1436">
+<p local-id=3D"328b1996e8c8">STEP (rarement utilis=C3=A9 en OS)&nbsp;</p></=
+li>
+</ul>
+<p local-id=3D"15e3486fd14d">&nbsp;</p>
+<p local-id=3D"492db49b5f28">&nbsp;</p>
+<p local-id=3D"1012da76a682">&nbsp;</p>
+<p local-id=3D"0b2b69887fa7">&nbsp;</p>
+<p local-id=3D"f3289c724364"><strong>DELIVERY_TYPE</strong>&nbsp;</p>
+<div class=3D"table-wrap">
+<table data-table-width=3D"4000" data-layout=3D"default" data-local-id=3D"6=
+22260fb-98ed-4dfe-b20c-f2bd70c2866a" class=3D"confluenceTable">
+<tbody>
+<tr data-local-id=3D"b2f843d1-b6be-40dc-9755-472695f8ba41">
+<td data-highlight-colour=3D"#f5f5f5" data-local-id=3D"09c68a87-5d3f-461a-a=
+9b7-f4a949d988ae" class=3D"confluenceTd">
+<p local-id=3D"963f16298e21"><strong>Valeur</strong>&nbsp;</p></td>
+<td data-highlight-colour=3D"#f5f5f5" data-local-id=3D"08956ecf-bc38-4832-a=
+ed1-935c0bbe0547" class=3D"confluenceTd">
+<p local-id=3D"43586af82aa9"><strong>Signification</strong>&nbsp;</p></td>
+</tr>
+<tr data-local-id=3D"2b4d25c3-87e2-4d62-aadd-60935cee05e6">
+<td data-highlight-colour=3D"transparent" data-local-id=3D"57ff837f-6b79-49=
+78-8e99-45c9c46689f4" class=3D"confluenceTd">
+<p local-id=3D"998f690b77c5">AUTOMATED&nbsp;</p></td>
+<td data-highlight-colour=3D"transparent" data-local-id=3D"82755a6b-80ae-42=
+f7-9ad7-7fce035afae8" class=3D"confluenceTd">
+<p local-id=3D"89e047ef4ecb">Via workflow / Journey&nbsp;</p></td>
+</tr>
+<tr data-local-id=3D"8dcb86eb-8b8c-43fd-86f6-5de75331b758">
+<td data-highlight-colour=3D"transparent" data-local-id=3D"ca16fbdd-3226-42=
+d6-83ac-daaff3cb367f" class=3D"confluenceTd">
+<p local-id=3D"2815cb640f12">ONESHOT&nbsp;</p></td>
+<td data-highlight-colour=3D"transparent" data-local-id=3D"46570290-43b5-4b=
+46-9ad1-cbc2398b6eb3" class=3D"confluenceTd">
+<p local-id=3D"356b03b60b06">Envoi ponctuel&nbsp;</p></td>
+</tr>
+<tr data-local-id=3D"78e21d64-3431-4975-be2a-26b15bf8aaab">
+<td data-highlight-colour=3D"transparent" data-local-id=3D"e9bc3df0-4e96-4a=
+5f-b566-96a094dc7f82" class=3D"confluenceTd">
+<p local-id=3D"b95951aabc73">TRANSACTIONAL&nbsp;</p></td>
+<td data-highlight-colour=3D"transparent" data-local-id=3D"ee830ce2-daf2-4a=
+37-ba60-d4e36b81cd13" class=3D"confluenceTd">
+<p local-id=3D"7df380726b6e">Event syst=C3=A8me&nbsp;</p></td>
+</tr>
+<tr data-local-id=3D"87cda6cd-5bde-472f-8e47-7a4a887df8ca">
+<td data-highlight-colour=3D"transparent" data-local-id=3D"a2b690db-4b0d-4b=
+8e-9a75-3684a82e0c5d" class=3D"confluenceTd">
+<p local-id=3D"a4fe9c1586fa">SCHEDULED (optionnel)&nbsp;</p></td>
+<td data-highlight-colour=3D"transparent" data-local-id=3D"aa1c1a54-ca68-4b=
+63-8ea0-6594747ea2aa" class=3D"confluenceTd">
+<p local-id=3D"d22e94d4f7c5">Envoi planifi=C3=A9&nbsp;</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p local-id=3D"0cd5c3682413">&nbsp;</p>
+<p local-id=3D"a7831e2b3e7e">&nbsp;</p>
+<p local-id=3D"fc2fa909e54b">&nbsp;</p>
+<p local-id=3D"6b14764817e9">&nbsp;</p>
+<p local-id=3D"899a884485ac">&nbsp;</p>
+<p local-id=3D"9d231dc12b0f">Discussion avec M=C3=A9lanie :<code>&nbsp;</co=
+de></p>
+<ul local-id=3D"5f46eff95831">
+<li local-id=3D"56e4fc3db1e2">
+<p local-id=3D"3e8755ea2bbb">Caract=C3=A8res maximum pour les noms d=E2=80=
+=99assets ?&nbsp; <strong>50</strong><code>&nbsp;</code></p></li>
+<li local-id=3D"13a607f8844d">
+<p local-id=3D"7fad9d729009">Utilisation des noms complet (A tester avec un=
+e vraie campagne)<code>&nbsp;</code></p></li>
+<li local-id=3D"1f977b7c4a65">
+<p local-id=3D"045433f6ac73">Revoir les dimensions pour les OneShot, pour =
+=C3=A9viter les doublons (Si une m=C3=AAme initiative au m=C3=AAme moment) =
+et dimension de date (Pour reporting =E2=80=93 Year over Year,&nbsp; Month =
+vs LY, Month Over Month)<code>&nbsp;</code></p></li>
+<li local-id=3D"5e1e8cd5d3e3">
+<p local-id=3D"4d5677eb75be">Valider les dimensions Obligatoire vs Optionne=
+lle (exemple Version et Test)&nbsp;</p></li>
+</ul>
+<ul local-id=3D"850ebf05-3e5a-4e66-9e04-a2e5e60f63ff">
+<li local-id=3D"8cc95280-4fe6-4f57-a115-51805b5bfd63">
+<p local-id=3D"83d815c2a893">Cr=C3=A9er proc=C3=A9dure<code>&nbsp;</code><b=
+r><code>&nbsp;</code><br>
+&nbsp;</p></li>
+</ul>
+<p local-id=3D"2517905e12a1">&nbsp;</p>
+<p local-id=3D"6446c9a3fbd0">&nbsp;</p>
+<p local-id=3D"083cd6cf2102">&nbsp;</p>
+<p local-id=3D"3e0ee3ff2e74">&nbsp;</p>
+<p local-id=3D"7c2acc468415">&nbsp;</p>
+<p local-id=3D"bd657a96dc0c">&nbsp;</p>
+<p local-id=3D"8e89349dd1bc">Tests op=C3=A9rationnels&nbsp;</p>
+<ol start=3D"1" local-id=3D"3ca0904a-2075-4e4c-8b54-7ecaaf5f7ba8">
+<li local-id=3D"e5cda46b-daae-4211-a188-faff273d12eb">
+<p local-id=3D"92543320bc09">VK_AUT_MCL_100_ONB_EM_NA_CA_EN_B2B_FY26&nbsp;<=
+/p></li>
+</ol>
+<ol start=3D"2" local-id=3D"76ccb5a3-0fca-430d-a258-714f1e37b3f2">
+<li local-id=3D"79024f73-8560-45d7-a461-8647a1529371">
+<p local-id=3D"8386ac977be4">SP_OS_CO_PRM_IA_NA_US_EN_WIBYCBI_AP_2026<code>=
+&nbsp;</code><br>
+&nbsp;</p></li>
+</ol>
+<p local-id=3D"03d4e5872783">&nbsp;</p>
+<p local-id=3D"f8b5e2eeb406">&nbsp;</p>
+<p local-id=3D"80b3d9cd2cb0">&nbsp;</p>
+<p local-id=3D"96349d51bd43">&nbsp;</p>
+<p local-id=3D"3005d9f6d4ba">&nbsp;</p>
+<p local-id=3D"fbd31bf5fab3">&nbsp;</p>
+<p local-id=3D"16de823c9555">&nbsp;</p>
+<p local-id=3D"8d6eb077edbd">&nbsp;</p>
+<p local-id=3D"bc9179e1a5c8">&nbsp;</p>
+<p local-id=3D"384368ad2446"><code>&nbsp;</code><br>
+&nbsp;</p>
+<p local-id=3D"521a5d6bec22">&nbsp;</p>
+<p local-id=3D"b4f84f90486f">&nbsp;</p>
+<p local-id=3D"99ae5483676e">&nbsp;</p>
+<p local-id=3D"cbd2a1778fc9">&nbsp;</p>
+<p local-id=3D"399d53aab013">&nbsp;</p>
+<p local-id=3D"8d9a2d954669"><code>&nbsp;</code><br><code>&nbsp;</code><br>=
+<code>&nbsp;</code><br><code>&nbsp;</code><br><code>&nbsp;</code><br><em><s=
+trong><u>Initiative vs Objective</u></strong></em>&nbsp;</p>
+<div class=3D"table-wrap">
+<table data-table-width=3D"4000" data-layout=3D"default" data-local-id=3D"7=
+6d6b1bf-74f0-413a-a49d-e19e0b5d97a4" class=3D"confluenceTable">
+<tbody>
+<tr data-local-id=3D"836a7751-eb88-469f-9e91-5773e08be297">
+<td data-highlight-colour=3D"transparent" data-local-id=3D"e2350fa6-47a4-48=
+e5-bf28-842133906721" class=3D"confluenceTd">
+<p local-id=3D"1154cd512626">Concept&nbsp;</p></td>
+<td data-highlight-colour=3D"transparent" data-local-id=3D"abe4ce04-8192-46=
+a1-9601-3dd1fcdee92e" class=3D"confluenceTd">
+<p local-id=3D"32a7683e5f6b">Niveau&nbsp;</p></td>
+<td data-highlight-colour=3D"transparent" data-local-id=3D"e20f0742-5a5f-45=
+cd-8a97-0fa1150a829f" class=3D"confluenceTd">
+<p local-id=3D"391485f2c57e">But / Usage&nbsp;</p></td>
+</tr>
+<tr data-local-id=3D"0cc56fc7-091e-4124-bf71-9ce200e2f776">
+<td data-highlight-colour=3D"transparent" data-local-id=3D"dd9c48c7-6728-42=
+3b-ac37-2579949f99df" class=3D"confluenceTd">
+<p local-id=3D"0dd3ad949b61">Initiative&nbsp;</p></td>
+<td data-highlight-colour=3D"transparent" data-local-id=3D"0847377a-3491-4c=
+54-928b-eb4709b329b2" class=3D"confluenceTd">
+<p local-id=3D"6e3f92092657">Macro / strat=C3=A9gique&nbsp;</p></td>
+<td data-highlight-colour=3D"transparent" data-local-id=3D"f0cf1cb1-4ef8-42=
+08-b75e-dee808830070" class=3D"confluenceTd">
+<p local-id=3D"1105fc5221f3">Repr=C3=A9sente une campagne ou programme busi=
+ness global, un =C2=AB projet CRM =C2=BB qui peut contenir plusieurs Journe=
+ys ou actions. Exemple : Camera Activation, Referral Program, VIP Loyalty, =
+Subscription. C=E2=80=99est stable dans le temps.&nbsp;</p></td>
+</tr>
+<tr data-local-id=3D"2a867232-c878-4b83-a86e-f6d23c370d4b">
+<td data-highlight-colour=3D"transparent" data-local-id=3D"ac9536ee-135d-44=
+d6-905b-4afe0aaf6803" class=3D"confluenceTd">
+<p local-id=3D"cd451f3fc7a8">Objective&nbsp;</p></td>
+<td data-highlight-colour=3D"transparent" data-local-id=3D"d022237a-f507-41=
+ce-965f-c0a4341f9397" class=3D"confluenceTd">
+<p local-id=3D"375c2127a8f6">Micro / tactique&nbsp;</p></td>
+<td data-highlight-colour=3D"transparent" data-local-id=3D"4301c69e-1dfe-48=
+45-ae8c-5dba676a499c" class=3D"confluenceTd">
+<p local-id=3D"356dc6ed92e9">Repr=C3=A9sente l=E2=80=99objectif CRM ou mark=
+eting d=E2=80=99un message ou step dans un Journey. Ce sont des valeurs sta=
+ndardis=C3=A9es pour le reporting : Acquisition, Onboarding, Upsell, Cross-=
+sell, Retention, Winback, Education=E2=80=A6&nbsp;</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p local-id=3D"d99c1b6dba10">&nbsp;</p>
+<p local-id=3D"0717d8f10c04">=F0=9F=92=A1 En r=C3=A9sum=C3=A9 : Objective d=
+=C3=A9crit ce que fait le message, Initiative d=C3=A9crit =C3=A0 quel progr=
+amme strat=C3=A9gique il appartient.&nbsp;</p>
+<p local-id=3D"248679060990">&nbsp;</p>
+<p local-id=3D"dc0415fc53be">&nbsp;</p>
+<p local-id=3D"7cedcffc6eca"><u>&nbsp;B - Outils : comment et quand utilise=
+r la nomenclature ?</u><code>&nbsp;</code><br>
+&nbsp;</p>
+<p local-id=3D"ff61e6c71c34"></p>
+<p local-id=3D"b2bab61894b7"></p>
+<p local-id=3D"9dad9aa7d55f"></p>
+<p local-id=3D"23bec069ce31"></p>
+<p local-id=3D"12f61d83fb9d"></p>
+<p local-id=3D"3e724f6b1a45"></p>
+<p local-id=3D"ada00a903e17"></p>
+<p local-id=3D"62e931c20055"></p><a data-card-appearance=3D"embed" data-lay=
+out=3D"center" data-original-height=3D"596.88" data-width=3D"100.00" href=
+=3D"https://vosker.atlassian.net/wiki/spaces/MEV/database/5592088601" local=
+-id=3D"bd4b5db88a9c" rel=3D"nofollow">https://vosker.atlassian.net/wiki/spa=
+ces/MEV/database/5592088601</a>
+</div>
+</div>
+</div>
+</div>
+    </div>
+</body>
+</html>
+------=_Part_118_317897081.1775742048777
+Content-Type: application/octet-stream
+Content-Transfer-Encoding: base64
+Content-Location: file:///C:/7381823a818db2558f8996b84830a55aff3bd0090f3cb21d8c64f5e03352c51d
+
+iVBORw0KGgoAAAANSUhEUgAAABAAAAAQBAMAAADt3eJSAAAAA3NCSVQICAjb4U/gAAAAFVBMVEX/
+//9wcHBwcHBwcHBwcHBwcHBwcHA3RenHAAAAB3RSTlMAZoiZzN3/SzZomQAAAAlwSFlzAAALEgAA
+CxIB0t1+/AAAABx0RVh0U29mdHdhcmUAQWRvYmUgRmlyZXdvcmtzIENTNui8sowAAAAUdEVYdENy
+ZWF0aW9uIFRpbWUANi8xLzEzOKlF0AAAACFJREFUCJljYCATsCgwqIAZTMnMyRAhsTABCIMxkVxT
+GQCLcwHyUKXpLgAAAABJRU5ErkJggg==
+------=_Part_118_317897081.1775742048777--
