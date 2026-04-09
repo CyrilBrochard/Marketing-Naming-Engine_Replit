@@ -3,15 +3,6 @@ export type NomenclatureOption = {
   label: string;
 };
 
-export type Dimension = {
-  id: string;
-  label: string;
-  description?: string;
-  required: boolean;
-  options: NomenclatureOption[];
-  freeText?: boolean;
-};
-
 export const BRANDS: NomenclatureOption[] = [
   { value: "VK", label: "VK – Vosker" },
   { value: "SP", label: "SP – Spypoint" },
@@ -75,22 +66,32 @@ export const REGIONS: NomenclatureOption[] = [
   { value: "APAC", label: "APAC – Asie-Pacifique" },
 ];
 
-export const COUNTRIES: NomenclatureOption[] = [
-  { value: "CA", label: "CA – Canada" },
-  { value: "US", label: "US – États-Unis" },
-  { value: "UK", label: "UK – Royaume-Uni" },
-  { value: "FR", label: "FR – France" },
-  { value: "DE", label: "DE – Allemagne" },
-  { value: "SP", label: "SP – Espagne" },
-  { value: "IT", label: "IT – Italie" },
+export type CountryEntry = NomenclatureOption & { regions: string[] };
+
+export const COUNTRIES: CountryEntry[] = [
+  { value: "CA", label: "CA – Canada", regions: ["NA"] },
+  { value: "US", label: "US – États-Unis", regions: ["NA"] },
+  { value: "UK", label: "UK – Royaume-Uni", regions: ["EMEA"] },
+  { value: "FR", label: "FR – France", regions: ["EMEA"] },
+  { value: "DE", label: "DE – Allemagne", regions: ["EMEA"] },
+  { value: "SP", label: "SP – Espagne", regions: ["EMEA"] },
+  { value: "IT", label: "IT – Italie", regions: ["EMEA"] },
+  { value: "MX", label: "MX – Mexique", regions: ["LATAM"] },
+  { value: "BR", label: "BR – Brésil", regions: ["LATAM"] },
+  { value: "AU", label: "AU – Australie", regions: ["APAC"] },
+  { value: "JP", label: "JP – Japon", regions: ["APAC"] },
 ];
 
-export const LANGUAGES: NomenclatureOption[] = [
-  { value: "FR", label: "FR – Français" },
-  { value: "EN", label: "EN – Anglais" },
-  { value: "ES", label: "ES – Espagnol" },
-  { value: "DE", label: "DE – Allemand" },
-  { value: "IT", label: "IT – Italien" },
+export type LanguageEntry = NomenclatureOption & { regions: string[] };
+
+export const LANGUAGES: LanguageEntry[] = [
+  { value: "EN", label: "EN – Anglais", regions: ["NA", "EMEA", "APAC"] },
+  { value: "FR", label: "FR – Français", regions: ["NA", "EMEA", "LATAM"] },
+  { value: "ES", label: "ES – Espagnol", regions: ["EMEA", "LATAM"] },
+  { value: "DE", label: "DE – Allemand", regions: ["EMEA"] },
+  { value: "IT", label: "IT – Italien", regions: ["EMEA"] },
+  { value: "PT", label: "PT – Portugais", regions: ["LATAM"] },
+  { value: "JA", label: "JA – Japonais", regions: ["APAC"] },
 ];
 
 export const SEGMENTS: NomenclatureOption[] = [
@@ -146,3 +147,8 @@ export const CAMPAIGN_TYPES: NomenclatureOption[] = [
   { value: "NPS", label: "NPS" },
   { value: "SUR", label: "SUR – Survey" },
 ];
+
+export function getCountryRegion(countryValue: string): string {
+  const c = COUNTRIES.find((c) => c.value === countryValue);
+  return c?.regions[0] ?? "";
+}
